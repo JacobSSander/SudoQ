@@ -1,29 +1,40 @@
-SUDOQ README
+# SudoQ
 
-ANDROID STUFF
+Times of bringing towels along are long over, changes are demanded.
 
-All you need you get over here http://developer.android.com/index.html
-The SDK -> http://developer.android.com/sdk/index.html
+I do enjoy using the SudoQ application, but some things have to be changed (or even removed).
 
-SETUP
+## Who is this fork for?
 
-Import with Android-Studio should go seamlessly.
+Primarily for myself, as I will ditch features that I do not need, but others might need.
+I do not recommend others to use this fork. But feel free to contact me for other demands.
 
-To run the app on the emulator or a phone you have to … 
-… compile to the target SDK (Not min SDK) otherwise you'll get compile errors.
-… add the sudoq-model to your sudoq-app project's buildpath in case eclipse got that wrong.
-… create an assets folder called assets within the sudoq-app project and put the  Sudokus folder which contains pre-generated Sudokus in it.
+## Whats the roadmap of this fork?
 
-WORKING THE CODE
+After some thinking I decided to go back to a state where the code was not migrated to kotlin (~4months ago) for several reasons.
+That means as next step the fixes/changes from the original repo have to be applied to the Java files.
 
-Some advise:
+I intend to cleanup several things, since it looks like this project does need a small refactoring. There are some unanswered questions in this code too.
+Anything which is not required in this project should be removed. Primary this refers to old unused code and weird xml files.
+Probably the test cases will be removed and recreated later on. That is less code to maintain - yeet yolo - lololooo.
 
-Keep any android specific code away from the model.
-In case you got stuck: http://xkcd.com/ or http://stackoverflow.com/questions/tagged/android
+Once the basics are working, new features will be added.
 
-That should be all. In case of emergencies Don't Panic, and call one of the devs.
+### Needed features:
 
-And don't forget your towel!
+- Input system: Currently a field is selected and then a number. However it should be the other way round, selecting a number and placing it into fields then. This has to be changed. The amount of wasted touch-clicks I have to do is insane without this.
+- HelpSystem: Show remaining field count. Show remaining digit count.
+- History: When placing a number which would remove notes, this is counted as multiple history steps, while it should be only one step. It makes using undo mentally challenging, instead of just a single press.
+- Looks: Currently there is no theme, everything is green-white. While the green is fine, a dark mode should be a thing these days.
+- Score: I do not care nor use the score - But the penalty should be action based and not settings based. It should also be possible to enable/disable help while playing.
 
+## Import/Use:
 
+- Download/Install/Setup AndroidStudio
+- Import the `sudoq-app` folder into AndroidStudio
 
+## Contact:
+
+Please contact me to talk about the app and this project :)
+
+The easiest way to contact me is to join my [Discord server](https://discord.gg/dYYxNvp).
