@@ -31,7 +31,8 @@ Once the basics are working, new features will be added.
 ## Import/Use:
 
 - Download/Install/Setup AndroidStudio
-- Import the `sudoq-app` folder into AndroidStudio
+- Clone this repository
+- Import the downloaded repository with AndroidStudio
 
 ## Contact:
 
