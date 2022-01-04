@@ -16,8 +16,6 @@ android {
         minSdkVersion 14
         targetSdkVersion 31
         resConfigs "en", "de", "fr"
-        testApplicationId "de.sudoq.test"
-        testInstrumentationRunner "android.test.InstrumentationTestRunner"
     }
 
     sourceSets {
