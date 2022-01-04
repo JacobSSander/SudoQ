@@ -1,24 +1,10 @@
 apply plugin: 'java'
 
-/*plugins {//test
-    // Apply the java-library plugin to add support for Java Library
-    id 'java-library'
-}*///test end
-
 targetCompatibility = '1.7'
 sourceCompatibility = '1.7'
 
 //* for debug of creating jar
 dependencies {
-    //implementation 'org.testng:testng:6.9.6'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.0.3'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.0.3'
-
-//testCompile 'junit:junit:4.7'
-testImplementation 'org.apache.directory.studio:org.apache.commons.io:2.4'
-testImplementation 'org.kie.modules:org-apache-commons-lang3:6.3.0.CR1'
-
-//    otherTestsImplementation 'org.apache.directory.studio:org.apache.commons.io:2.4'
 }
 
 //https://blog.inspeerity.com/gradle/integration-and-unit-separate-gradle-tasks/
@@ -35,35 +21,9 @@ configurations {
     othertestsImplementation.extendsFrom testImplementation
     othertestsRuntime.extendsFrom testRuntime
 }
-task otherTest(type: Test) {
+task secondTest(type: Test) {
     testClassesDirs = sourceSets.othertests.output.classesDirs
     classpath = sourceSets.othertests.runtimeClasspath
 }
 
-check.dependsOn otherTest
-
-/*
-Was funktioniert?
-gradle otherTest
-schlägt fehl
-package org.junit does not exist
-package org.apache.commons.io does not exist
-* */
-
-
-
-
-/* //https://stackoverflow.com/a/35431416/3014199
-task deleteJar(type: Delete) {
-    delete 'libs/jars/sudoqmodel.jar'
-}
-
-task createJar(type: Copy) {
-    from('build/libs/')
-    into('.')
-    include('classes.jar')
-    rename('classes.jar', 'sudoqmodel.jar')
-}
-
-createJar.dependsOn(deleteJar)
-*/
+check.dependsOn secondTest
