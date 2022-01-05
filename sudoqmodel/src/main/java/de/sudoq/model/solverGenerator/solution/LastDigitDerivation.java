@@ -12,36 +12,35 @@ import de.sudoq.model.sudoku.Sudoku;
 import de.sudoq.model.sudoku.Utils;
 import de.sudoq.model.sudoku.Utils.ConstraintShape;
 
-/**
- * Created by timo on 04.10.16.
- */
-public class LastDigitDerivation extends SolveDerivation {
-
-    private Constraint constraint;
-    private Position   emptyPosition;
-    private int        solution;
-
-    public LastDigitDerivation(Constraint constraint, Position emptyPosition, int solution) {
-        super(HintTypes.LastDigit);
-        this.constraint = constraint;
-        this.emptyPosition = emptyPosition;
-        this.solution = solution;
-        hasActionListCapability = true;
-    }
-
-    public Constraint getConstraint() {
-        return constraint;
-    }
-
-    public ConstraintShape getConstraintShape(){
-        return Utils.getGroupShape(constraint);
-    }
-
-    @Override
-    public List<Action> getActionList(Sudoku sudoku){
-        SolveActionFactory af = new SolveActionFactory();
-        return Collections.singletonList(af.createAction(solution, sudoku.getCell(emptyPosition)));
-    }
-
-
+public class LastDigitDerivation extends SolveDerivation
+{
+	private Constraint constraint;
+	private Position emptyPosition;
+	private int solution;
+	
+	public LastDigitDerivation(Constraint constraint, Position emptyPosition, int solution)
+	{
+		super(HintTypes.LastDigit);
+		this.constraint = constraint;
+		this.emptyPosition = emptyPosition;
+		this.solution = solution;
+		hasActionListCapability = true;
+	}
+	
+	public Constraint getConstraint()
+	{
+		return constraint;
+	}
+	
+	public ConstraintShape getConstraintShape()
+	{
+		return Utils.getGroupShape(constraint);
+	}
+	
+	@Override
+	public List<Action> getActionList(Sudoku sudoku)
+	{
+		SolveActionFactory af = new SolveActionFactory();
+		return Collections.singletonList(af.createAction(solution, sudoku.getCell(emptyPosition)));
+	}
 }

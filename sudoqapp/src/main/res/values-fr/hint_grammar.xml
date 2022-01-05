@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources><!--fr-->
+	<!--Row,Column,Diagonal,Block,Other-->
+	<string-array name="shape_gender_values">
+		<item>@string/gender_feminin</item>
+		<item>@string/gender_feminin</item>
+		<item>@string/gender_feminin</item>
+		<item>@string/gender_maskulin</item>
+		<item>@string/gender_maskulin</item>
+	</string-array>
 
-    <!--Row,Column,Diagonal,Block,Other-->
-    <string-array name="shape_gender_values">
-        <item>@string/gender_feminin</item>
-        <item>@string/gender_feminin</item>
-        <item>@string/gender_feminin</item>
-        <item>@string/gender_maskulin</item>
-        <item>@string/gender_maskulin</item>
-    </string-array>
-    
-    <!---->
-    <string-array name="gender2in_the">
-        <item>m|dans ce</item>
-        <item>f|dans cette</item>
-    </string-array>
+	<!---->
+	<string-array name="gender2in_the">
+		<item>m|dans ce</item>
+		<item>f|dans cette</item>
+	</string-array>
 </resources>

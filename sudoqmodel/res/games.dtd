@@ -1,5 +1,5 @@
 <!ELEMENT games (game)*>
 <!ELEMENT game EMPTY>
-<!ATTLIST game 
+<!ATTLIST game
 	id IDREF #REQUIRED
 	finished (yes | no) "yes">

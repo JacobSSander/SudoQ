@@ -1,3 +1,5 @@
-<paths >
-    <files-path path="." name="sudoqGame" />
+<paths>
+	<files-path
+			path="."
+			name="sudoqGame" />
 </paths>

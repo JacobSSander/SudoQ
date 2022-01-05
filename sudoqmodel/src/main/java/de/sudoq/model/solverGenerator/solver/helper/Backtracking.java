@@ -20,117 +20,125 @@ import de.sudoq.model.sudoku.Position;
  * leer wird oder aber das gesamte Sudoku befüllt ist. In den ersten beiden Fällen wird ein Feld zurückgegangen
  * (Backtracking) und dort mit dem nächsten Symbol fortgefahren.
  */
-public class Backtracking extends SolveHelper {
+public class Backtracking extends SolveHelper
+{
 	/* Constructors */
-
-   /**
+	
+	/**
 	 * Erzeugt einen neuen Backtracking Helfer für das spezifizierte Sudoku.
-	 * 
-	 * @param sudoku
-	 *            Das Sudoku auf dem dieser Helper operieren soll
-	 * @param complexity
-	 *            Die Schwierigkeit der Anwendbarkeit dieses Lösungshelfers
-	 * @throws IllegalArgumentException
-	 *             Wird geworfen, falls das Sudoku null oder die complexity kleiner als 0 ist
+	 *
+	 * @param sudoku Das Sudoku auf dem dieser Helper operieren soll
+	 * @param complexity Die Schwierigkeit der Anwendbarkeit dieses Lösungshelfers
+	 * @throws IllegalArgumentException Wird geworfen, falls das Sudoku null oder die complexity kleiner als 0 ist
 	 */
-	public Backtracking(SolverSudoku sudoku, int complexity) {
+	public Backtracking(SolverSudoku sudoku, int complexity)
+	{
 		super(sudoku, complexity);
 		hintType = HintTypes.Backtracking;
 	}
-
+	
 	/* Methods */
-
+	
 	/**
 	 * Wendet das Backtracking-Verfahren an und ermittelt damit die Lösung für alle Felder des Sudokus. Es wird die
 	 * Kandidatenliste desjenigen Feldes mit der kleinsten Kandidatenliste upgedated, sodass in dieser nur noch die
 	 * korrekte Lösung vorhanden ist. Gibt es keine eindeutige kleinste Kandidatenliste, so wird diese zufällig
 	 * ausgewählt.
-	 * 
-	 * @param buildDerivation
-	 *            Bestimmt, ob beim Finden eines Subsets eine Herleitung dafür erstellt werden soll, welche daraufhin
-	 *            mit getDerivation abgerufen werden kann.
+	 *
+	 * @param buildDerivation Bestimmt, ob beim Finden eines Subsets eine Herleitung dafür erstellt werden soll, welche daraufhin mit getDerivation abgerufen werden kann.
 	 * @return true, falls das Backtracking angewendet werden konnte, false falls nicht
 	 */
-	public boolean update(boolean buildDerivation) {
+	public boolean update(boolean buildDerivation)
+	{
 		lastDerivation = null;
-
-		/* find among positions with several possible candidates one with minimal #candidates */
-
+		
+		// find among positions with several possible candidates one with minimal #candidates
+		
 		//filter for all positions with more than one candidate
 		List<Position> ambiguousPositions = getAmbiguous();
-		if (ambiguousPositions.isEmpty())
+		if(ambiguousPositions.isEmpty())
+		{
 			return false;
-
+		}
+		
 		//take the position with minimal candidates
 		Position leastCandidatesPosition = getMinimalCandidatesPosition(ambiguousPositions);
-		if (leastCandidatesPosition == null) //if none was found
+		if(leastCandidatesPosition == null) //if none was found
+		{
 			return false;
-
-		/*  */
+		}
+		
 		BitSet candidates = (BitSet) this.sudoku.getCurrentCandidates(leastCandidatesPosition).clone();
 		int chosenCandidate = this.sudoku.getCurrentCandidates(leastCandidatesPosition).nextSetBit(0);
 		this.sudoku.startNewBranch(leastCandidatesPosition, chosenCandidate);
-
+		
 		// UNCOMMENT THE FOLLOWING TO PRINT BACKTRACKING TRACE
 		/*
 		 * for (int i = 0; i < sudoku.branchings.size(); i++) { System.out.print(" "); }
 		 * System.out.println(leastCandidatesPosition + "(#" + leastCandidates + "): " + chosenCandidate);
 		 */
-
-		if (buildDerivation) {
+		
+		if(buildDerivation)
+		{
 			lastDerivation = new SolveDerivation(HintTypes.Backtracking);
 			BitSet irrelevantCandidates = candidates; //startNewBranch() deletes candidates in currendCandidates, and branchpool can't be accessed from here, so we need to use saved bitset
 			BitSet relevantCandidates = new BitSet();
 			relevantCandidates.set(chosenCandidate);
 			irrelevantCandidates.clear(chosenCandidate);
-			DerivationCell derivField = new DerivationCell(leastCandidatesPosition, relevantCandidates,
-			                                                 irrelevantCandidates);
+			DerivationCell derivField = new DerivationCell(leastCandidatesPosition, relevantCandidates, irrelevantCandidates);
 			lastDerivation.addDerivationCell(derivField);
 			lastDerivation.setDescription("Backtrack");
 		}
-
+		
 		return true;
 	}
-
-	private List<Position> getAmbiguous(){
+	
+	private List<Position> getAmbiguous()
+	{
 		Stack<Position> ambiguousPositions = new Stack<>();
-		for (Position p : this.sudoku.getPositions()) {
+		for(Position p : this.sudoku.getPositions())
+		{
 			int cardinality = this.sudoku.getCurrentCandidates(p).cardinality();
-			if (cardinality > 1)
+			if(cardinality > 1)
+			{
 				ambiguousPositions.push(p);
+			}
 		}
 		return ambiguousPositions;
 	}
-
-	private Position getMinimalCandidatesPosition(List<Position> ambiguousPositions){
-		Comparator<Position> compareCardinality = new Comparator<Position>() {
-
-			private int getCardinality(Position p){
+	
+	private Position getMinimalCandidatesPosition(List<Position> ambiguousPositions)
+	{
+		Comparator<Position> compareCardinality = new Comparator<Position>()
+		{
+			private int getCardinality(Position p)
+			{
 				return sudoku.getCurrentCandidates(p).cardinality();
 			}
-
+			
 			@Override
-			public int compare(Position p1, Position p2) {
+			public int compare(Position p1, Position p2)
+			{
 				return getCardinality(p1) - getCardinality(p2); //neg if cardinality(p1) < cardinality(p2), zero if eq, pos ...
 			}
 		};
-
+		
 		return Collections.min(ambiguousPositions, compareCardinality);
-
 	}
-
-
+	
+	
 	/**
 	 * {@inheritDoc}
-	 * 
+	 *
 	 * Als SolveDerivation wird lediglich die Kandidatenliste des gelösten Feldes als irrelevantCandidates, sowie die
 	 * richtige Lösung des Feldes als relevantCandidate zurückgegeben.
-	 * 
+	 *
 	 * @return Eine SolveDerivation, die die Herleitung für den letzten update-Schritt enthält oder null, falls kein
 	 *         Backtracking möglich war
 	 */
 	@Override
-	public SolveDerivation getDerivation() {
+	public SolveDerivation getDerivation()
+	{
 		return lastDerivation;
 	}
 }

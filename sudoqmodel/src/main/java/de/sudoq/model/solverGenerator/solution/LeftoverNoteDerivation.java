@@ -13,43 +13,50 @@ import de.sudoq.model.sudoku.Sudoku;
 import de.sudoq.model.sudoku.Utils;
 import de.sudoq.model.sudoku.Utils.ConstraintShape;
 
-/**
- * Created by timo on 04.10.16.
- */
-public class LeftoverNoteDerivation extends SolveDerivation {
-
-
-    private Constraint constraint;
-    private int note;
-
-    private List<Action> actionlist;
-
-
-    public LeftoverNoteDerivation(Constraint c, int note) {
-        super(HintTypes.LeftoverNote);
-        constraint = c;
-        this.note = note;
-        this.actionlist = new ArrayList<>();
-        hasActionListCapability = true;
-    }
-
-    public Constraint getConstraint(){ return constraint; }
-    public int getNote(){ return note; }
-
-    public ConstraintShape getConstraintShape(){
-        return Utils.getGroupShape(constraint);
-    }
-
-
-    @Override
-    public List<Action> getActionList(Sudoku sudoku){
-        NoteActionFactory af = new NoteActionFactory();
-
-        for (Position p : constraint ) {
-            Cell f = sudoku.getCell(p);
-            if (f.isNoteSet(note) && f.isNotSolved())
-                actionlist.add(af.createAction(note, f));
-        }
-        return actionlist;
-    }
+public class LeftoverNoteDerivation extends SolveDerivation
+{
+	private Constraint constraint;
+	private int note;
+	
+	private List<Action> actionlist;
+	
+	public LeftoverNoteDerivation(Constraint c, int note)
+	{
+		super(HintTypes.LeftoverNote);
+		constraint = c;
+		this.note = note;
+		this.actionlist = new ArrayList<>();
+		hasActionListCapability = true;
+	}
+	
+	public Constraint getConstraint()
+	{
+		return constraint;
+	}
+	
+	public int getNote()
+	{
+		return note;
+	}
+	
+	public ConstraintShape getConstraintShape()
+	{
+		return Utils.getGroupShape(constraint);
+	}
+	
+	@Override
+	public List<Action> getActionList(Sudoku sudoku)
+	{
+		NoteActionFactory af = new NoteActionFactory();
+		
+		for(Position p : constraint)
+		{
+			Cell f = sudoku.getCell(p);
+			if(f.isNoteSet(note) && f.isNotSolved())
+			{
+				actionlist.add(af.createAction(note, f));
+			}
+		}
+		return actionlist;
+	}
 }

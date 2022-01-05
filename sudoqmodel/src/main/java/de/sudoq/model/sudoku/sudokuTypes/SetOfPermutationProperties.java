@@ -1,8 +1,8 @@
 /*
  * SudoQ is a Sudoku-App for Adroid Devices with Version 2.2 at least.
  * Copyright (C) 2012  Heiko Klare, Julian Geppert, Jan-Bernhard Kordaß, Jonathan Kieling, Tim Zeitz, Timo Abele
- * This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version. 
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. 
+ * This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  * You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 package de.sudoq.model.sudoku.sudokuTypes;
@@ -16,16 +16,18 @@ import de.sudoq.model.xml.Xmlable;
 /**
  * An xmlable ArrayList of PermutationProperties
  */
-public class SetOfPermutationProperties extends ArrayList<PermutationProperties> implements Xmlable{
-
+public class SetOfPermutationProperties extends ArrayList<PermutationProperties> implements Xmlable
+{
 	public static final String SET_OF_PERMUTATION_PROPERTIES = "SetOfPermutationProperties";
-	private       final String PERMUTATION_PROPERTY          = "PermutationProperty";
-	private       final String TAG_PROPERTY_NR               = "permutationNr";
+	private final String PERMUTATION_PROPERTY = "PermutationProperty";
+	private final String TAG_PROPERTY_NR = "permutationNr";
 	
 	@Override
-	public XmlTree toXmlTree() {
+	public XmlTree toXmlTree()
+	{
 		XmlTree representation = new XmlTree(SET_OF_PERMUTATION_PROPERTIES);
-		for (PermutationProperties p:this){
+		for(PermutationProperties p : this)
+		{
 			XmlTree xt = new XmlTree(PERMUTATION_PROPERTY);
 			xt.addAttribute(new XmlAttribute(TAG_PROPERTY_NR, "" + p.ordinal()));
 			representation.addChild(xt);
@@ -33,13 +35,16 @@ public class SetOfPermutationProperties extends ArrayList<PermutationProperties>
 		
 		return representation;
 	}
-
+	
 	@Override
-	public void fillFromXml(XmlTree xmlTreeRepresentation) throws IllegalArgumentException {
-		for (XmlTree sub : xmlTreeRepresentation) {
-			if (sub.getName().equals(PERMUTATION_PROPERTY)) {
+	public void fillFromXml(XmlTree xmlTreeRepresentation) throws IllegalArgumentException
+	{
+		for(XmlTree sub : xmlTreeRepresentation)
+		{
+			if(sub.getName().equals(PERMUTATION_PROPERTY))
+			{
 				add(PermutationProperties.values()[Integer.parseInt(sub.getAttributeValue(TAG_PROPERTY_NR))]);
 			}
-		}		
+		}
 	}
 }

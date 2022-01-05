@@ -17,39 +17,41 @@ import de.sudoq.model.solverGenerator.solver.helper.SolveHelper;
 import de.sudoq.model.solverGenerator.solver.helper.XWingHelper;
 import de.sudoq.model.sudoku.Sudoku;
 
-/**
- * Created by timo on 25.09.16.
- */
-public class SolvingAssistant {
-    public static SolveDerivation giveAHint(Sudoku sudoku){
-        SolverSudoku s = new SolverSudoku(sudoku, SolverSudoku.Initialization.USE_EXISTING);
-        Queue<SolveHelper> helpers = new LinkedList<>();
-        helpers.add(new LastDigitHelper(s,  0));
-        helpers.add(new LastCandidateHelper(s,  0));
-        helpers.add(new LeftoverNoteHelper(s,  0));
-        helpers.add(new NakedHelper    (s,1,0));
-        helpers.add(new NakedHelper    (s,2,0));
-        helpers.add(new NakedHelper    (s,3,0));
-        helpers.add(new NakedHelper    (s,4,0));
-        helpers.add(new NakedHelper    (s,5,0));
-        helpers.add(new HiddenHelper   (s,1,0));
-        helpers.add(new HiddenHelper   (s,2,0));
-        helpers.add(new HiddenHelper   (s,3,0));
-        helpers.add(new HiddenHelper   (s,4,0));
-        helpers.add(new HiddenHelper   (s,5,0));
-
-        helpers.add(new LockedCandandidatesHelper(s,0));
-
-        helpers.add(new XWingHelper(s,0));
-
-        helpers.add(new NoNotesHelper(s, 0));
-
-        for (SolveHelper sh : helpers)
-            if(sh.update(true)){
-                //System.out.println("SolvingAssistant finds: " + sh.getClass());
-                return sh.getDerivation();}
-
-        return new BacktrackingDerivation();
-
-    }
+public class SolvingAssistant
+{
+	public static SolveDerivation giveAHint(Sudoku sudoku)
+	{
+		SolverSudoku s = new SolverSudoku(sudoku, SolverSudoku.Initialization.USE_EXISTING);
+		Queue<SolveHelper> helpers = new LinkedList<>();
+		helpers.add(new LastDigitHelper(s, 0));
+		helpers.add(new LastCandidateHelper(s, 0));
+		helpers.add(new LeftoverNoteHelper(s, 0));
+		helpers.add(new NakedHelper(s, 1, 0));
+		helpers.add(new NakedHelper(s, 2, 0));
+		helpers.add(new NakedHelper(s, 3, 0));
+		helpers.add(new NakedHelper(s, 4, 0));
+		helpers.add(new NakedHelper(s, 5, 0));
+		helpers.add(new HiddenHelper(s, 1, 0));
+		helpers.add(new HiddenHelper(s, 2, 0));
+		helpers.add(new HiddenHelper(s, 3, 0));
+		helpers.add(new HiddenHelper(s, 4, 0));
+		helpers.add(new HiddenHelper(s, 5, 0));
+		
+		helpers.add(new LockedCandandidatesHelper(s, 0));
+		
+		helpers.add(new XWingHelper(s, 0));
+		
+		helpers.add(new NoNotesHelper(s, 0));
+		
+		for(SolveHelper sh : helpers)
+		{
+			if(sh.update(true))
+			{
+				//System.out.println("SolvingAssistant finds: " + sh.getClass());
+				return sh.getDerivation();
+			}
+		}
+		
+		return new BacktrackingDerivation();
+	}
 }

@@ -13,36 +13,37 @@ import de.sudoq.model.sudoku.Sudoku;
 /**
  * In case the user doesn't specify any notes, we find fields that have none
  */
-public class NoNotesDerivation extends SolveDerivation {
-
-    private List<Action> actionlist;
-
-    public NoNotesDerivation() {
-        super(HintTypes.NoNotes);
-        this.actionlist = new ArrayList<>();
-        hasActionListCapability = true;
-    }
-
-
+public class NoNotesDerivation extends SolveDerivation
+{
+	private List<Action> actionlist;
+	
+	public NoNotesDerivation()
+	{
+		super(HintTypes.NoNotes);
+		this.actionlist = new ArrayList<>();
+		hasActionListCapability = true;
+	}
 
     /*public ConstraintShape getConstraintShape(){
         return Utils.getGroupShape(constraint);
     }*/
-
-    /* creates a list of actions in case the user want the app to execute the hints */
-    @Override
-    public List<Action> getActionList(Sudoku sudoku){
-        NoteActionFactory af = new NoteActionFactory();
-
-        for(Iterator<DerivationCell> dfi = getCellIterator(); dfi.hasNext();){
-            DerivationCell df = dfi.next();
-            CandidateSet cs = new CandidateSet();
-            cs.assignWith(df.getRelevantCandidates());
-            for (int i : cs.getSetBits()){
-                actionlist.add(af.createAction(i, sudoku.getCell(df.getPosition())));
-            }
-        }
-        return actionlist;
-    }
-
+	
+	// creates a list of actions in case the user want the app to execute the hints
+	@Override
+	public List<Action> getActionList(Sudoku sudoku)
+	{
+		NoteActionFactory af = new NoteActionFactory();
+		
+		for(Iterator<DerivationCell> dfi = getCellIterator(); dfi.hasNext(); )
+		{
+			DerivationCell df = dfi.next();
+			CandidateSet cs = new CandidateSet();
+			cs.assignWith(df.getRelevantCandidates());
+			for(int i : cs.getSetBits())
+			{
+				actionlist.add(af.createAction(i, sudoku.getCell(df.getPosition())));
+			}
+		}
+		return actionlist;
+	}
 }

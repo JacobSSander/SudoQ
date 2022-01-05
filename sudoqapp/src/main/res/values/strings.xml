@@ -1,235 +1,222 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- SudoQ is a Sudoku-App for Adroid Devices with Version 2.2 at least. -->
+<?xml version="1.0" encoding="utf-8"?><!-- SudoQ is a Sudoku-App for Adroid Devices with Version 2.2 at least. -->
 <!-- Copyright (C) 2012  Haiko Klare, Julian Geppert, Jan-Bernhard Kordaß, Jonathan Kieling, Tim Zeitz, Timo Abele -->
 <!-- This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.  -->
 <!-- This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.  -->
-<resources
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="MissingTranslation" >
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+	<string name="app_name" translatable="false">SudoQ</string>
 
-    <string name="app_name" translatable="false">SudoQ</string>
-    
-    <!-- Android specific strings -->
-    <string name="version_code" translatable="false">1.0.4</string><!--where are these used??? in manifest code is an integer and name is the x.y.z thing-->
-    <string name="version_name" translatable="false">Berta</string>
-    
+	<!-- Android specific strings -->
+	<string name="version_code" translatable="false">1.0.4</string><!--where are these used??? in manifest code is an integer and name is the x.y.z thing-->
+	<string name="version_name" translatable="false">Berta</string>
 
-    <!-- Action Bar Entries -->
-    <string name="action_show_tutorial">Tutorial</string>
+	<!-- Action Bar Entries -->
+	<string name="action_show_tutorial">Tutorial</string>
 
-    <string name="action_new_profile">Create New Profile</string>
-    <string name="action_delete_profile">Delete This Profile</string>
-    <string name="action_switch_profile">Switch Profile</string>
-    <string name="action_delete_all_gestures">Delete all gestures</string>
-    <string name="action_delete_single_gesture">Delete specific gesture</string>
-    <string name="action_restore_all">Restore all</string>
-    
-    
-    <!-- Error Messages -->
-    <string name="error_profile_dir_not_found">Error! Profile folder could not be located!</string>
-    <string name="error_sudoku_preference_incomplete">Error! Settings are incomplete!</string>
-    <string name="error_gestures_no_library">Gestures not available!</string>
-    <string name="error_thumbnail_get">Cannot capture screen on pause!</string>
-    <string name="error_thumbnail_saved">Cannot save captured thumbnail!</string>
-    <string name="error_thumbnail_load">Cannot load thumbnail for given game!</string>
-    <string name="error_gestures_not_complete">You need to define Gestures for all Symbols in your Profile!</string>
-    <string name="error_cant_switch_symbols">No alternate symbolset available!</string>
-    
-    <!-- Toasts -->
-    <string name="toast_solved_wrong">A cell is not solved correctly</string>
-    <string name="toast_solved_correct">Everything is solved correctly</string>
-    <string name="toast_invalid_symbol">Invalid symbol</string>
-    <string name="toast_restricted_symbol">Symbol is restricted</string>
-    <string name="toast_stop_that">STOP THAT!!!</string>
-    
-    <!-- Splash -->
-    <string name="splash_text">SudoQ is being initialized for the first start</string>    
-    
-    <!-- Dialogs -->
-    <string name="dialog_yes">Yes</string>
-    <string name="dialog_no">No</string>
-    <string name="dialog_won_title">You won!</string>
-    <string name="dialog_surrender_title">You surrendered!</string>
-    <string name="dialog_won_text">Do you want to quit?</string>
-    <string name="dialog_won_statistics">Statistics</string>
-    <string name="dialog_won_timeneeded">Time needed</string>
-    <string name="dialog_won_score">Score</string>
-    
-    <!-- Statistics -->
-    <string name="statistics_title">Statistics</string>
-    <string name="statistics_counters">Counters</string>
-    <string name="statistics_played_sudokus">Played sudokus</string>
-    <string name="statistics_played_easy_sudokus"  >Played easy sudokus</string>
-    <string name="statistics_played_medium_sudokus">Played medium sudokus</string>
-    <string name="statistics_played_difficult_sudokus">Played difficult sudokus</string>
-    <string name="statistics_played_infernal_sudokus" >Played infernal sudokus</string>
+	<string name="action_new_profile">Create New Profile</string>
+	<string name="action_delete_profile">Delete This Profile</string>
+	<string name="action_switch_profile">Switch Profile</string>
+	<string name="action_delete_all_gestures">Delete all gestures</string>
+	<string name="action_delete_single_gesture">Delete specific gesture</string>
+	<string name="action_restore_all">Restore all</string>
+
+	<!-- Error Messages -->
+	<string name="error_profile_dir_not_found">Error! Profile folder could not be located!</string>
+	<string name="error_sudoku_preference_incomplete">Error! Settings are incomplete!</string>
+	<string name="error_gestures_no_library">Gestures not available!</string>
+	<string name="error_thumbnail_get">Cannot capture screen on pause!</string>
+	<string name="error_thumbnail_saved">Cannot save captured thumbnail!</string>
+	<string name="error_thumbnail_load">Cannot load thumbnail for given game!</string>
+	<string name="error_gestures_not_complete">You need to define Gestures for all Symbols in your Profile!</string>
+	<string name="error_cant_switch_symbols">No alternate symbolset available!</string>
+
+	<!-- Toasts -->
+	<string name="toast_solved_wrong">A cell is not solved correctly</string>
+	<string name="toast_solved_correct">Everything is solved correctly</string>
+	<string name="toast_invalid_symbol">Invalid symbol</string>
+	<string name="toast_restricted_symbol">Symbol is restricted</string>
+	<string name="toast_stop_that">STOP THAT!!!</string>
+
+	<!-- Splash -->
+	<string name="splash_text">SudoQ is being initialized for the first start</string>
+
+	<!-- Dialogs -->
+	<string name="dialog_yes">Yes</string>
+	<string name="dialog_no">No</string>
+	<string name="dialog_won_title">You won!</string>
+	<string name="dialog_surrender_title">You surrendered!</string>
+	<string name="dialog_won_text">Do you want to quit?</string>
+	<string name="dialog_won_statistics">Statistics</string>
+	<string name="dialog_won_timeneeded">Time needed</string>
+	<string name="dialog_won_score">Score</string>
+
+	<!-- Statistics -->
+	<string name="statistics_title">Statistics</string>
+	<string name="statistics_counters">Counters</string>
+	<string name="statistics_played_sudokus">Played sudokus</string>
+	<string name="statistics_played_easy_sudokus">Played easy sudokus</string>
+	<string name="statistics_played_medium_sudokus">Played medium sudokus</string>
+	<string name="statistics_played_difficult_sudokus">Played difficult sudokus</string>
+	<string name="statistics_played_infernal_sudokus">Played infernal sudokus</string>
 	<string name="statistics_records">Records</string>
 	<string name="statistics_score">Highscore</string>
 	<string name="statistics_fastest_solving_time">Fastest solving time</string>
-        
+
 	<!-- Profile preference titles und textviews -->
 
 	<!-- Profile list -->
 	<string name="profile_list_profile_changed">Profile changed to</string>
-	    
+
 	<!-- Player Preferences Button -->
 	<string name="player_preferences_button_changeprofile">Change Profile</string>
-    
 
-    <!-- GestureBuilder -->
-    <string name="gesture_builder_title">Gesture Builder</string>
-    <string name="gesture_builder_define_gesture">Define a Gesture</string>
-    
-    <!-- GameTypeSelection Buttons -->
-    <string name="sf_gametypeselection_local_sudoku" >Sudoku</string>
-    <string name="sf_gametypeselection_server_sudoku">Official Sudoku</string>
-    <string name="sf_gametypeselection_create_mp"    >Create</string>
-    <string name="sf_gametypeselection_join_mp"      >Join</string>
-    
-    <!-- SudokuPreferences Buttons und TextViews -->    
-    <string name="subtitle_sudokupreferences_sudokutype">Sudoku Type:</string>
-    <string name="subtitle_sudokupreferences_sudokucomplexity">Difficulty:</string>
-    <string name="sf_sudokupreferences_start">Start</string>
-    <string name="sf_sudokupreferences_sudokutype">Choose Sudoku Type</string>
-    <string name="sf_sudokupreferences_sudokucomplexity">Choose Difficulty</string>
-    <string name="sf_sudokupreferences_assistances">Adjust Assistances</string>
-    <string name="sf_sudokupreferences_copying">Templates are currently being copied. Please wait a moment.</string>
+	<!-- GestureBuilder -->
+	<string name="gesture_builder_title">Gesture Builder</string>
+	<string name="gesture_builder_define_gesture">Define a Gesture</string>
 
-    <!-- SudokuActivity -->
-    <string name="sf_sudoku_button_bookmark">Bookmark</string>
-    <string name="sf_sudoku_button_close">Close</string>
-    <string name="sf_sudoku_assistances_title">Assistances</string>
-    <string name="sf_sudoku_assistances_check">Check solution</string>
-    <string name="sf_sudoku_assistances_solve_specific">Solve selected cell</string>
-    <string name="sf_sudoku_assistances_solve_random">Solve random cell</string>
-    <string name="sf_sudoku_assistances_solve_surrender">Surrender</string>
-    <string name="sf_sudoku_assistances_back_to_valid_state">Back to last correct status</string>
-    <string name="sf_sudoku_assistances_back_to_bookmark">Back to last bookmark</string>
-    <string name="sf_sudoku_assistances_give_hint">give a hint</string>
+	<!-- GameTypeSelection Buttons -->
+	<string name="sf_gametypeselection_local_sudoku">Sudoku</string>
+	<string name="sf_gametypeselection_server_sudoku">Official Sudoku</string>
+	<string name="sf_gametypeselection_create_mp">Create</string>
+	<string name="sf_gametypeselection_join_mp">Join</string>
 
-    <string name="sf_sudoku_title_gesture_input_entry">Input symbol via gesture</string>
-    <string name="sf_sudoku_title_gesture_input_note">Input note via gesture</string>
+	<!-- SudokuPreferences Buttons und TextViews -->
+	<string name="subtitle_sudokupreferences_sudokutype">Sudoku Type:</string>
+	<string name="subtitle_sudokupreferences_sudokucomplexity">Difficulty:</string>
+	<string name="sf_sudokupreferences_start">Start</string>
+	<string name="sf_sudokupreferences_sudokutype">Choose Sudoku Type</string>
+	<string name="sf_sudokupreferences_sudokucomplexity">Choose Difficulty</string>
+	<string name="sf_sudokupreferences_assistances">Adjust Assistances</string>
+	<string name="sf_sudokupreferences_copying">Templates are currently being copied. Please wait a moment.</string>
 
-    <string name="sf_sudoku_title_action_tree">Action History</string>
-    <string name="sf_sudoku_assistances_crash">crash the app</string>
+	<!-- SudokuActivity -->
+	<string name="sf_sudoku_button_bookmark">Bookmark</string>
+	<string name="sf_sudoku_button_close">Close</string>
+	<string name="sf_sudoku_assistances_title">Assistances</string>
+	<string name="sf_sudoku_assistances_check">Check solution</string>
+	<string name="sf_sudoku_assistances_solve_specific">Solve selected cell</string>
+	<string name="sf_sudoku_assistances_solve_random">Solve random cell</string>
+	<string name="sf_sudoku_assistances_solve_surrender">Surrender</string>
+	<string name="sf_sudoku_assistances_back_to_valid_state">Back to last correct status</string>
+	<string name="sf_sudoku_assistances_back_to_bookmark">Back to last bookmark</string>
+	<string name="sf_sudoku_assistances_give_hint">give a hint</string>
 
-    <!-- Titles -->
-    <string name="title_mainmenu">SudoQ</string>
-    <string name="title_gametypeselection">New Sudoku</string>
-    
-    <!-- Subtitles -->
-	<string name="subtitle_gametypeselection_mp">Multiplayer</string>  
-	
+	<string name="sf_sudoku_title_gesture_input_entry">Input symbol via gesture</string>
+	<string name="sf_sudoku_title_gesture_input_note">Input note via gesture</string>
+
+	<string name="sf_sudoku_title_action_tree">Action History</string>
+	<string name="sf_sudoku_assistances_crash">crash the app</string>
+
+	<!-- Titles -->
+	<string name="title_mainmenu">SudoQ</string>
+	<string name="title_gametypeselection">New Sudoku</string>
+
+	<!-- Subtitles -->
+	<string name="subtitle_gametypeselection_mp">Multiplayer</string>
+
 	<!-- Complexity -->
-    <string name="complexity_easy">Easy</string>
-    <string name="complexity_medium">Medium</string>
-    <string name="complexity_difficult">Difficult</string>
-    <string name="complexity_infernal">Infernal</string>
-    
-    <!-- Sudoku Types -->
-    <string name="sudoku_type_standard_9x9"  >Standard-Sudoku 9x9</string>
-    <string name="sudoku_type_standard_16x16">Standard-Sudoku 16x16</string>
-    <string name="sudoku_type_standard_6x6"  >Standard-Sudoku 6x6</string>
-    <string name="sudoku_type_standard_4x4"  >Standard-Sudoku 4x4</string>
-    <string name="sudoku_type_squiggly_a_9x9">Squiggly-Sudoku 9x9</string>
-    <string name="sudoku_type_squiggly_b_9x9">Squoggly-Sudoku 9x9</string>
-    <string name="sudoku_type_stairstep_9x9" >Stairstep-Sudoku 9x9</string>
-    <string name="sudoku_type_samurai"       >Samurai-Sudoku</string>
-    <string name="sudoku_type_hyper"         >Hyper-Sudoku</string>
-    <string name="sudoku_type_xsudoku"       >X-Sudoku</string>
-    <string name="sudoku_type_dummy_longest_name">Standard-Sudoku 16x16</string><!-- for loadingitem -->
-    
-    <string name="sf_sudokupreferences_title">Sudoku-Preferences</string>
-    <string name="sf_advancedpreferences_title">Advanced Settings</string>
-    <string name="sf_advancedpreferences_restricttypes_title">Offered Types</string>
-    
-        
-    <!-- Game states -->    
-        
-    <string name="check_mark" translatable="false">✔</string>
-    <string name=    "x_mark" translatable="false">✘</string>
+	<string name="complexity_easy">Easy</string>
+	<string name="complexity_medium">Medium</string>
+	<string name="complexity_difficult">Difficult</string>
+	<string name="complexity_infernal">Infernal</string>
 
-    <!-- Sudoku Loading -->
-    <string name="tx_no_sudokus_to_load">No saved Sudokus available.</string>
-    <string name="sudokuloading_delete_finished">Delete finished Sudokus</string>
-    <string name="sudokuloading_delete_all"     >Delete all Sudokus</string>
-    <string name="time_format" translatable="false">HH:mm:ss dd.MM.yyyy</string>
-    <string name="sf_loading_back">Go back!</string>
-    <string name="sudokuloading_dialog_play">play</string>
-    <string name="sudokuloading_dialog_delete">delete</string>
-    
+	<!-- Sudoku Types -->
+	<string name="sudoku_type_standard_9x9">Standard-Sudoku 9x9</string>
+	<string name="sudoku_type_standard_16x16">Standard-Sudoku 16x16</string>
+	<string name="sudoku_type_standard_6x6">Standard-Sudoku 6x6</string>
+	<string name="sudoku_type_standard_4x4">Standard-Sudoku 4x4</string>
+	<string name="sudoku_type_squiggly_a_9x9">Squiggly-Sudoku 9x9</string>
+	<string name="sudoku_type_squiggly_b_9x9">Squoggly-Sudoku 9x9</string>
+	<string name="sudoku_type_stairstep_9x9">Stairstep-Sudoku 9x9</string>
+	<string name="sudoku_type_samurai">Samurai-Sudoku</string>
+	<string name="sudoku_type_hyper">Hyper-Sudoku</string>
+	<string name="sudoku_type_xsudoku">X-Sudoku</string>
+	<string name="sudoku_type_dummy_longest_name">Standard-Sudoku 16x16</string><!-- for loadingitem -->
+
+	<string name="sf_sudokupreferences_title">Sudoku-Preferences</string>
+	<string name="sf_advancedpreferences_title">Advanced Settings</string>
+	<string name="sf_advancedpreferences_restricttypes_title">Offered Types</string>
+
+	<!-- Game states -->
+
+	<string name="check_mark" translatable="false">✔</string>
+	<string name="x_mark" translatable="false">✘</string>
+
+	<!-- Sudoku Loading -->
+	<string name="tx_no_sudokus_to_load">No saved Sudokus available.</string>
+	<string name="sudokuloading_delete_finished">Delete finished Sudokus</string>
+	<string name="sudokuloading_delete_all">Delete all Sudokus</string>
+	<string name="time_format" translatable="false">HH:mm:ss dd.MM.yyyy</string>
+	<string name="sf_loading_back">Go back!</string>
+	<string name="sudokuloading_dialog_play">play</string>
+	<string name="sudokuloading_dialog_delete">delete</string>
+
 	<!-- File conventions -->
-    <string name="profile_file_prefix"  translatable="false">profile_</string>
-    <string name="game_file_prefix" translatable="false">game_</string>
-    <string name="sudoku_file_prefix"   translatable="false">sudoku_</string>
-    <string name="current_profile_file" translatable="false">current_profile</string>
-    
-    <!-- Relative Path -->
-    <string name="path_rel_profiles" translatable="false">profiles</string>
-    <string name="path_rel_sudokus"  translatable="false">sudokus</string>
-    
-    <!--  Defaults -->
-    <string name="default_user_name">Profile 1</string>
-    <string name="menu_settings" translatable="false">MENU_SETTINGS</string>
-    <string name="fab_go_back">Click to delete.\nClick button again to stop deleting</string>
-    <string name="sf_sudokuloading_title">Saved Sudokus</string>
+	<string name="profile_file_prefix" translatable="false">profile_</string>
+	<string name="game_file_prefix" translatable="false">game_</string>
+	<string name="sudoku_file_prefix" translatable="false">sudoku_</string>
+	<string name="current_profile_file" translatable="false">current_profile</string>
 
-    <!-- Hints -->
+	<!-- Relative Path -->
+	<string name="path_rel_profiles" translatable="false">profiles</string>
+	<string name="path_rel_sudokus" translatable="false">sudokus</string>
 
-    <string name="hint_lastdigit">Look at the highlighted {shape}! There\'s only one cell left.</string>
+	<!--  Defaults -->
+	<string name="default_user_name">Profile 1</string>
+	<string name="menu_settings" translatable="false">MENU_SETTINGS</string>
+	<string name="fab_go_back">Click to delete.\nClick button again to stop deleting</string>
+	<string name="sf_sudokuloading_title">Saved Sudokus</string>
 
-    <string name="constraintshape_row_accusative_determined"     >row</string>
-    <string name="constraintshape_column_accusative_determined"  >column</string>
-    <string name="constraintshape_diagonal_accusative_determined">diagonal</string>
-    <string name="constraintshape_block_accusative_determined"   >block</string>
-    <string name="constraintshape_other_accusative_determined"   >group</string>
+	<!-- Hints -->
 
-    <string name="constraintshape_row_genitive_determined"     >row</string>
-    <string name="constraintshape_column_genitive_determined"  >column</string>
-    <string name="constraintshape_diagonal_genitive_determined">diagonal</string>
-    <string name="constraintshape_block_genitive_determined"   >block</string>
-    <string name="constraintshape_other_genitive_determined"   >group</string>
+	<string name="hint_lastdigit">Look at the highlighted {shape}! There\'s only one cell left.</string>
 
-    <string name="constraintshape_row_dative_determined"     >rows</string>
-    <string name="constraintshape_column_dative_determined"  >columns</string>
-    <string name="constraintshape_diagonal_dative_determined">diagonals</string>
-    <string name="constraintshape_block_dative_determined"   >blocks</string>
-    <string name="constraintshape_other_dative_determined"   >groups</string>
+	<string name="constraintshape_row_accusative_determined">row</string>
+	<string name="constraintshape_column_accusative_determined">column</string>
+	<string name="constraintshape_diagonal_accusative_determined">diagonal</string>
+	<string name="constraintshape_block_accusative_determined">block</string>
+	<string name="constraintshape_other_accusative_determined">group</string>
 
-    <string name="gender_maskulin">m</string>
-    <string name="gender_feminin">f</string>
-    <string name="gender_neutral">n</string>
+	<string name="constraintshape_row_genitive_determined">row</string>
+	<string name="constraintshape_column_genitive_determined">column</string>
+	<string name="constraintshape_diagonal_genitive_determined">diagonal</string>
+	<string name="constraintshape_block_genitive_determined">block</string>
+	<string name="constraintshape_other_genitive_determined">group</string>
 
-    <string name="maskuline_accusative_determiner"></string>
-    <string name="feminine_accusative_determiner"></string>
-    <string name="neutral_accusative_determiner"></string>
+	<string name="constraintshape_row_dative_determined">rows</string>
+	<string name="constraintshape_column_dative_determined">columns</string>
+	<string name="constraintshape_diagonal_dative_determined">diagonals</string>
+	<string name="constraintshape_block_dative_determined">blocks</string>
+	<string name="constraintshape_other_dative_determined">groups</string>
 
-    <string name="maskuline_accusative_suffix"></string> <!-- only used in german -->
-    <string name="feminine_accusative_suffix"></string>
-    <string name="neutral_accusative_suffix"></string>
+	<string name="gender_maskulin">m</string>
+	<string name="gender_feminin">f</string>
+	<string name="gender_neutral">n</string>
 
-    <string name="hint_lastcandidate">Look at the highlighted cell. There\'s only one candidate left.</string>
-    <string name="hint_leftovernote">Look at the highlighted {shape}. As {note} is set, any notes of it can be removed.</string>
+	<string name="maskuline_accusative_determiner"></string>
+	<string name="feminine_accusative_determiner"></string>
+	<string name="neutral_accusative_determiner"></string>
 
-    <string name="hint_nakedsingle_look">Look there\'s a naked single!</string>
-    <string name="hint_nakedsingle_note">{note} is the only note left in the highlighted cell.</string>
-    <string name="hint_nakedsingle_remove">It can be set there and removed from all other cells in this {shape}.</string>
+	<string name="maskuline_accusative_suffix"></string> <!-- only used in german -->
+	<string name="feminine_accusative_suffix"></string>
+	<string name="neutral_accusative_suffix"></string>
 
-    <string name="hint_nakedset">Look there\'s a naked set! {symbols} will in some way be distributed among the highlighted cells. They can be removed from all other cells in this group.</string>
+	<string name="hint_lastcandidate">Look at the highlighted cell. There\'s only one candidate left.</string>
+	<string name="hint_leftovernote">Look at the highlighted {shape}. As {note} is set, any notes of it can be removed.</string>
 
-    
-    <string name="hint_hiddensingle">Look there\'s a hidden single! Of all the cells in the highlighted shape \"{note}\" appears only in the highlighted cell. It can be set there.</string>
+	<string name="hint_nakedsingle_look">Look there\'s a naked single!</string>
+	<string name="hint_nakedsingle_note">{note} is the only note left in the highlighted cell.</string>
+	<string name="hint_nakedsingle_remove">It can be set there and removed from all other cells in this {shape}.</string>
 
-    <string name="hint_hiddenset">Look there\'s a hidden set! {symbols} will in some way be distributed among the highlighted cells. Therefore any other candidates in these cells can be removed.</string>
+	<string name="hint_nakedset">Look there\'s a naked set! {symbols} will in some way be distributed among the highlighted cells. They can be removed from all other cells in this group.</string>
 
-    
-    <string name="hint_lockedcandidates">There\'s a locked candidate: {note} appears only once in the blue group. It can therefore be deleted in all other cells in the green group.</string>
+	<string name="hint_hiddensingle">Look there\'s a hidden single! Of all the cells in the highlighted shape \"{note}\" appears only in the highlighted cell. It can be set there.</string>
 
-    <string name="hint_xWing">If you look at the intersections of green and blue groups some notes appear nowhere else in the blue groups. They can therefore be deleted in the green ones.</string>
+	<string name="hint_hiddenset">Look there\'s a hidden set! {symbols} will in some way be distributed among the highlighted cells. Therefore any other candidates in these cells can be removed.</string>
 
-    
-    <string name="hint_backtracking">As said, I\'m still in development. So I\'m out of ideas and my best advice is to set a bookmark and guess a cell.</string>
-    <string name="hint_fill_out_notes"> By the way, there\'s a cell that has no notes in it. If I don\'t see a note in a cell I assume that you\'ve ruled it out. I work best if all numbers that are still considered possible are set as notes in a cell. If you want I can enter the notes for you. </string>
+	<string name="hint_lockedcandidates">There\'s a locked candidate: {note} appears only once in the blue group. It can therefore be deleted in all other cells in the green group.</string>
 
+	<string name="hint_xWing">If you look at the intersections of green and blue groups some notes appear nowhere else in the blue groups. They can therefore be deleted in the green ones.</string>
 
+	<string name="hint_backtracking">As said, I\'m still in development. So I\'m out of ideas and my best advice is to set a bookmark and guess a cell.</string>
+	<string name="hint_fill_out_notes"> By the way, there\'s a cell that has no notes in it. If I don\'t see a note in a cell I assume that you\'ve ruled it out. I work best if all numbers that are still considered possible are set as notes in a cell. If you want I can enter the notes for you. </string>
 </resources>

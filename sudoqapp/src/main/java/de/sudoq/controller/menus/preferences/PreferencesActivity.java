@@ -12,8 +12,8 @@ import de.sudoq.model.game.Assistances;
 import de.sudoq.model.game.GameSettings;
 import de.sudoq.model.profile.Profile;
 
-public abstract class PreferencesActivity extends SudoqCompatActivity implements ModelChangeListener<Profile> {
-	
+public abstract class PreferencesActivity extends SudoqCompatActivity implements ModelChangeListener<Profile>
+{
 	CheckBox gesture;
 	CheckBox autoAdjustNotes;
 	CheckBox markRowColumn;
@@ -22,8 +22,7 @@ public abstract class PreferencesActivity extends SudoqCompatActivity implements
 	
 	//CheckBox helper;
 	//CheckBox lefthand;
-	Button   restricttypes;
-	
+	Button restricttypes;
 	
 	protected abstract void adjustValuesAndSave();
 	
@@ -32,19 +31,19 @@ public abstract class PreferencesActivity extends SudoqCompatActivity implements
 	 * Speichert die Einstellungen.
 	 */
 	@Override
-	public void onPause() {
+	public void onPause()
+	{
 		super.onPause();
 		adjustValuesAndSave();
 	}
 	
-	
 	/**
 	 * Öffnet den GestureBuilder.
-	 * 
-	 * @param view
-	 *            unbenutzt
+	 *
+	 * @param view unbenutzt
 	 */
-	public void openGestureBuilder(View view) {
+	public void openGestureBuilder(View view)
+	{
 		Intent gestureBuilderIntent = new Intent(this, GestureBuilder.class);
 		startActivity(gestureBuilderIntent);
 	}
@@ -54,28 +53,35 @@ public abstract class PreferencesActivity extends SudoqCompatActivity implements
 	 * die Preferences anhand der zur Zeit aktiven Profil-ID.
 	 */
 	@Override
-	public void onResume() {
+	public void onResume()
+	{
 		super.onResume();
 		refreshValues();
 	}
 	
 	protected abstract void refreshValues();
-
-	public void onModelChanged(Profile obj) {
+	
+	public void onModelChanged(Profile obj)
+	{
 		this.refreshValues();
 	}
 	
 	abstract protected void saveToProfile();
 	
-	protected void saveAssistance(Assistances a, CheckBox c){
+	protected void saveAssistance(Assistances a, CheckBox c)
+	{
 		Profile.getInstance().setAssistance(a, c.isChecked());
 	}
 	
-
-	protected void saveCheckbox(CheckBox cb, Assistances a, GameSettings gs){
+	protected void saveCheckbox(CheckBox cb, Assistances a, GameSettings gs)
+	{
 		if(cb.isChecked())
+		{
 			gs.setAssistance(a);
+		}
 		else
+		{
 			gs.clearAssistance(a);
+		}
 	}
 }

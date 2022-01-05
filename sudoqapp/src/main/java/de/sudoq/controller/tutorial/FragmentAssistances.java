@@ -8,7 +8,8 @@ import android.view.ViewGroup;
 
 import de.sudoq.R;
 
-public class FragmentAssistances extends Fragment {
+public class FragmentAssistances extends Fragment
+{
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle saved)
 	{
