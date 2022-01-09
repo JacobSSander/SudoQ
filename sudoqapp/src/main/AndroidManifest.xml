@@ -16,7 +16,7 @@
 			android:theme="@style/Theme.DesignDemo">
 
 		<activity
-				android:name=".controller.menus.SplashActivity"
+				android:name=".activities.SplashActivity"
 				android:noHistory="true"
 				android:configChanges="orientation"
 				android:windowActionBar="false"
@@ -28,45 +28,45 @@
 			</intent-filter>
 		</activity>
 
-		<activity android:name=".controller.SudoqCompatActivity" />
+		<activity android:name=".activities.SudoqCompatActivity" />
 		<activity
-				android:name=".controller.menus.MainActivity"
+				android:name=".activities.menus.MainActivity"
 				android:configChanges="layoutDirection|locale" />
 		<activity
-				android:name=".controller.menus.NewSudokuActivity"
+				android:name=".activities.menus.NewSudokuActivity"
 				android:label="@string/sf_sudokupreferences_title"
 				android:configChanges="layoutDirection|locale" />
 		<activity
-				android:name=".controller.menus.preferences.NewSudokuPreferencesActivity"
+				android:name=".activities.menus.preferences.NewSudokuPreferencesActivity"
 				android:label="@string/sf_sudokupreferences_title" />
 		<activity
-				android:name=".controller.menus.SudokuLoadingActivity"
+				android:name=".activities.menus.SudokuLoadingActivity"
 				android:label="@string/sf_sudokuloading_title"
 				android:noHistory="true"
 				android:configChanges="orientation" />
 		<activity
-				android:name=".controller.menus.GestureBuilder"
+				android:name=".activities.menus.GestureBuilder"
 				android:label="@string/gesture_builder_title" />
-		<activity android:name=".controller.sudoku.SudokuActivity" />
+		<activity android:name=".activities.sudoku.SudokuActivity" />
 		<activity
-				android:name=".controller.menus.preferences.PlayerPreferencesActivity"
+				android:name=".activities.menus.preferences.PlayerPreferencesActivity"
 				android:label="@string/profile_preference_title"
 				android:configChanges="layoutDirection|locale"
 				android:windowSoftInputMode="stateHidden" />
 		<activity
-				android:name=".controller.menus.preferences.AdvancedPreferencesActivity"
+				android:name=".activities.menus.preferences.AdvancedPreferencesActivity"
 				android:label="@string/sf_advancedpreferences_title" />
 		<activity
-				android:name=".controller.menus.preferences.RestrictTypesActivity"
+				android:name=".activities.menus.preferences.RestrictTypesActivity"
 				android:label="@string/sf_advancedpreferences_restricttypes_title" />
 		<activity
-				android:name=".controller.menus.StatisticsActivity"
+				android:name=".activities.menus.StatisticsActivity"
 				android:label="@string/statistics_title" />
 		<activity
-				android:name=".controller.menus.ProfileListActivity"
+				android:name=".activities.menus.ProfileListActivity"
 				android:theme="@style/Theme.DesignDemo.Dialog" />
 		<activity
-				android:name=".controller.tutorial.TutorialActivity"
+				android:name=".activities.tutorial.TutorialActivity"
 				android:label="@string/sf_tutorial_sudoku_title" />
 
 		<provider

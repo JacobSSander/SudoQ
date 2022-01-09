@@ -10,8 +10,8 @@ import androidx.core.content.pm.PackageInfoCompat;
 import java.util.BitSet;
 
 import de.sudoq.R;
-import de.sudoq.controller.menus.Utility;
-import de.sudoq.controller.sudoku.SudokuActivity;
+import de.sudoq.controller.menu.Utility;
+import de.sudoq.activities.sudoku.SudokuActivity;
 import de.sudoq.model.solverGenerator.solution.HiddenSetDerivation;
 import de.sudoq.model.solverGenerator.solution.LastDigitDerivation;
 import de.sudoq.model.solverGenerator.solution.LeftoverNoteDerivation;

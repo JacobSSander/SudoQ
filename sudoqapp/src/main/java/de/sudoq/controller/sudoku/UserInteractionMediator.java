@@ -12,12 +12,8 @@ import android.gesture.GestureOverlayView;
 import android.gesture.GestureOverlayView.OnGesturePerformedListener;
 import android.gesture.GestureStore;
 import android.gesture.Prediction;
-import android.graphics.Color;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -38,8 +34,6 @@ import de.sudoq.view.GestureInputOverlay;
 import de.sudoq.view.SudokuCellView;
 import de.sudoq.view.SudokuLayout;
 import de.sudoq.view.VirtualKeyboardLayout;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * Ein Vermittler zwischen einem Sudoku und den verschiedenen
@@ -295,7 +289,8 @@ public class UserInteractionMediator implements OnGesturePerformedListener, Inpu
 	/**
 	 * Aktualisiert die Anzeige der Tastatur.
 	 */
-	void updateKeyboard()
+	//Note/Ecconia: Changed from protected to public, cause of package move.
+	public void updateKeyboard()
 	{
 		SudokuCellView currentField = this.sudokuView.getCurrentCellView();
 		for(int i : this.game.getSudoku().getSudokuType().getSymbolIterator())
@@ -478,7 +473,8 @@ public class UserInteractionMediator implements OnGesturePerformedListener, Inpu
 	/**
 	 * Schränkt die Kandidaten auf der Tastatur ein.
 	 */
-	void restrictCandidates()
+	//Note/Ecconia: Changed from protected to public, cause of package move.
+	public void restrictCandidates()
 	{
 		this.virtualKeyboard.enableAllButtons();
 		SudokuCellView currectFieldView = this.sudokuView.getCurrentCellView();

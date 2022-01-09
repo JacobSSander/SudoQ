@@ -22,7 +22,7 @@ import de.sudoq.controller.sudoku.CellInteractionListener;
 import de.sudoq.controller.sudoku.board.CellViewPainter;
 import de.sudoq.controller.sudoku.hints.HintPainter;
 import de.sudoq.controller.sudoku.ObservableCellInteraction;
-import de.sudoq.controller.sudoku.SudokuActivity;
+import de.sudoq.activities.sudoku.SudokuActivity;
 import de.sudoq.model.game.Assistances;
 import de.sudoq.model.game.Game;
 import de.sudoq.model.sudoku.Cell;

@@ -7,6 +7,7 @@
  */
 package de.sudoq.controller.sudoku;
 
+import de.sudoq.activities.sudoku.SudokuActivity;
 import de.sudoq.model.actionTree.Action;
 import de.sudoq.model.actionTree.NoteActionFactory;
 import de.sudoq.model.actionTree.SolveActionFactory;

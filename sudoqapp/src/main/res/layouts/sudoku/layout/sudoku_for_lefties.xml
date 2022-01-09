@@ -42,7 +42,7 @@
             android:background="@drawable/background_serious" /-->
 
         <fragment
-            android:name="de.sudoq.controller.sudoku.ControlPanelFragment"
+            android:name="de.sudoq.activities.sudoku.ControlPanelFragment"
             android:id="@+id/controlPanelFragment"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
