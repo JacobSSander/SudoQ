@@ -33,7 +33,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import de.sudoq.R;
-import de.sudoq.activities.SudoqCompatActivity;
+import de.sudoq.activities.SudoQCompatActivity;
 import de.sudoq.controller.sudoku.board.CellViewPainter;
 import de.sudoq.controller.sudoku.board.CellViewStates;
 import de.sudoq.controller.sudoku.InputListener;
@@ -47,7 +47,7 @@ import de.sudoq.view.VirtualKeyboardLayout;
  * @author Anrion
  *
  */
-public class GestureBuilder extends SudoqCompatActivity implements OnGesturePerformedListener, InputListener
+public class GestureBuilderActivity extends SudoQCompatActivity implements OnGesturePerformedListener, InputListener
 {
 	/**
 	 * Fängt Gesteneingaben des Benutzers ab
@@ -59,7 +59,7 @@ public class GestureBuilder extends SudoqCompatActivity implements OnGesturePerf
 	 */
 	private GestureStore gestureStore = new GestureStore();
 	
-	private static final String LOG_TAG = GestureBuilder.class.getSimpleName();
+	private static final String LOG_TAG = GestureBuilderActivity.class.getSimpleName();
 	
 	/**
 	 * Flag für das Löschen von einer Gesten.

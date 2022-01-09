@@ -42,7 +42,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.sudoq.R;
-import de.sudoq.activities.SudoqListActivity;
+import de.sudoq.activities.SudoQListActivity;
 import de.sudoq.activities.sudoku.SudokuActivity;
 import de.sudoq.controller.menu.Utility;
 import de.sudoq.model.files.FileManager;
@@ -55,16 +55,16 @@ import de.sudoq.model.profile.Profile;
  * SudokuLoading können Sudokus geladen werden und daraufhin zur SudokuActivity
  * gewechselt werden.
  */
-public class SudokuLoadingActivity extends SudoqListActivity implements OnItemClickListener, OnItemLongClickListener
+public class LoadSudokuActivity extends SudoQListActivity implements OnItemClickListener, OnItemLongClickListener
 {
 	/**
 	 * Der Log-Tag für das LogCat
 	 */
-	private static final String LOG_TAG = SudokuLoadingActivity.class.getSimpleName();
+	private static final String LOG_TAG = LoadSudokuActivity.class.getSimpleName();
 	
 	/* Attributes */
 	
-	private SudokuLoadingAdapter adapter;
+	private LoadSudokuAdapter adapter;
 	
 	private List<GameData> games;
 
@@ -269,7 +269,7 @@ public class SudokuLoadingActivity extends SudoqListActivity implements OnItemCl
 				{
 					case 0://play
 						Profile.getInstance().setCurrentGame(adapter.getItem(position).getId());
-						Intent i = new Intent(SudokuLoadingActivity.this, SudokuActivity.class);
+						Intent i = new Intent(LoadSudokuActivity.this, SudokuActivity.class);
 						startActivity(i);
 						overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 						break;
@@ -343,7 +343,7 @@ public class SudokuLoadingActivity extends SudoqListActivity implements OnItemCl
 						Log.v("file-share", "gamefile getName " + gameFile.getName());
 						Log.v("file-share", "gamefile getParent " + gameFile.getParent());
 						
-						Uri fileUri = FileProvider.getUriForFile(SudokuLoadingActivity.this,
+						Uri fileUri = FileProvider.getUriForFile(LoadSudokuActivity.this,
 								"de.sudoq.fileprovider", tmpFile);
 						Log.v("file-share", "uri is null? " + (fileUri == null));
 						/*Intent*/
@@ -370,7 +370,7 @@ public class SudokuLoadingActivity extends SudoqListActivity implements OnItemCl
 	{
 		games = GameManager.getInstance().getGameList();
 		// initialize ArrayAdapter for the profile names and set it
-		adapter = new SudokuLoadingAdapter(this, games);
+		adapter = new LoadSudokuAdapter(this, games);
 		setListAdapter(adapter);
 		getListView().setOnItemClickListener(this);
 		getListView().setOnItemLongClickListener(this);

@@ -42,7 +42,7 @@ import java.io.OutputStream;
 import java.util.Set;
 
 import de.sudoq.R;
-import de.sudoq.activities.SudoqCompatActivity;
+import de.sudoq.activities.SudoQCompatActivity;
 import de.sudoq.controller.menu.Utility;
 import de.sudoq.controller.sudoku.ActionListener;
 import de.sudoq.controller.sudoku.ActionTreeController;
@@ -73,7 +73,7 @@ import de.sudoq.view.VirtualKeyboardLayout;
  * Spielfeld zu reagieren. Die Klasse wird außerdem benutzt um zu verwalten,
  * welche Navigationselemente dem Nutzer angezeigt werden.
  */
-public class SudokuActivity extends SudoqCompatActivity implements OnClickListener, ActionListener, ActionTreeNavListener
+public class SudokuActivity extends SudoQCompatActivity implements OnClickListener, ActionListener, ActionTreeNavListener
 {
 	/* Attributes */
 	

@@ -5,14 +5,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 
-import de.sudoq.activities.SudoqCompatActivity;
-import de.sudoq.activities.menus.GestureBuilder;
+import de.sudoq.activities.SudoQCompatActivity;
+import de.sudoq.activities.menus.GestureBuilderActivity;
 import de.sudoq.model.ModelChangeListener;
 import de.sudoq.model.game.Assistances;
 import de.sudoq.model.game.GameSettings;
 import de.sudoq.model.profile.Profile;
 
-public abstract class PreferencesActivity extends SudoqCompatActivity implements ModelChangeListener<Profile>
+public abstract class PreferencesActivity extends SudoQCompatActivity implements ModelChangeListener<Profile>
 {
 	CheckBox gesture;
 	CheckBox autoAdjustNotes;
@@ -44,7 +44,7 @@ public abstract class PreferencesActivity extends SudoqCompatActivity implements
 	 */
 	public void openGestureBuilder(View view)
 	{
-		Intent gestureBuilderIntent = new Intent(this, GestureBuilder.class);
+		Intent gestureBuilderIntent = new Intent(this, GestureBuilderActivity.class);
 		startActivity(gestureBuilderIntent);
 	}
 	

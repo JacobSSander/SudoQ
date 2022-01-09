@@ -14,50 +14,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.HeaderViewListAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
+
+import java.io.File;
 
 import de.sudoq.R;
 import de.sudoq.activities.tutorial.TutorialActivity;
 import de.sudoq.model.files.FileManager;
 
 /**
- * Eine ListActivity, welche die für einwandfreie Funktionalität der SudoQ-App
+ * Eine Activity, welche die für einwandfreie Funktionalität der SudoQ-App
  * notwendigen Initialisierungsarbeiten ausführt.
  */
-//TODO: Make abstract
-public class SudoqListActivity extends AppCompatActivity
+public abstract class SudoQCompatActivity extends AppCompatActivity
 {
-	private ListView mListView;
-	
-	protected ListView getListView()
-	{
-		if(mListView == null)
-		{
-			mListView = (ListView) findViewById(android.R.id.list);
-		}
-		return mListView;
-	}
-	
-	protected void setListAdapter(ListAdapter adapter)
-	{
-		getListView().setAdapter(adapter);
-	}
-	
-	protected ListAdapter getListAdapter()
-	{
-		ListAdapter adapter = getListView().getAdapter();
-		if(adapter instanceof HeaderViewListAdapter)
-		{
-			return ((HeaderViewListAdapter) adapter).getWrappedAdapter();
-		}
-		else
-		{
-			return adapter;
-		}
-	}
-	
 	/**
 	 * Initialisiert eine neue Activity, setzt dabei die für die App notwendigen
 	 * System-Properties und initialisiert den FileManager.
@@ -67,8 +36,9 @@ public class SudoqListActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		System.setProperty("org.xml.sax.driver", "org.xmlpull.v1.sax2.Driver");
-		FileManager.initialize(getDir(getString(R.string.path_rel_profiles), Context.MODE_PRIVATE),
-				getDir(getString(R.string.path_rel_sudokus), Context.MODE_PRIVATE));
+		File profilesDir = getDir(getString(R.string.path_rel_profiles), Context.MODE_PRIVATE);
+		File sudokusDir = getDir(getString(R.string.path_rel_sudokus), Context.MODE_PRIVATE);
+		FileManager.initialize(profilesDir, sudokusDir);
 	}
 	
 	@Override
@@ -91,6 +61,15 @@ public class SudoqListActivity extends AppCompatActivity
 		inflater.inflate(R.menu.action_bar_standard, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
+	
+	/**
+	 * Fügt dem übergebenen Menü die globalen Einträge (Tutorial) hinzu.
+	 *
+	 * @param menu Das Menü
+	 *
+	protected void prepareOptionsMenu(Menu menu) {
+	menu.add(0, MENU_TUTORIAL, 0, getString(R.string.action_show_tutorial));
+	}*/
 	
 	/**
 	 * Verarbeitet das Auswählen des Tutorial-Menüeintrags.

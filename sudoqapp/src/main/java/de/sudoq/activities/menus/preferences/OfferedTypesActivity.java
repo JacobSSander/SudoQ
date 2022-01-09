@@ -22,7 +22,7 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Toast;
 
 import de.sudoq.R;
-import de.sudoq.activities.SudoqListActivity;
+import de.sudoq.activities.SudoQListActivity;
 import de.sudoq.model.profile.Profile;
 import de.sudoq.model.sudoku.sudokuTypes.SudokuTypes;
 import de.sudoq.model.xml.SudokuTypesList;
@@ -32,16 +32,16 @@ import de.sudoq.model.xml.SudokuTypesList;
  * SudokuLoading können Sudokus geladen werden und daraufhin zur SudokuActivity
  * gewechselt werden.
  */
-public class RestrictTypesActivity extends SudoqListActivity implements OnItemClickListener, OnItemLongClickListener
+public class OfferedTypesActivity extends SudoQListActivity implements OnItemClickListener, OnItemLongClickListener
 {
 	/**
 	 * Der Log-Tag für das LogCat
 	 */
-	private static final String LOG_TAG = RestrictTypesActivity.class.getSimpleName();
+	private static final String LOG_TAG = OfferedTypesActivity.class.getSimpleName();
 	
 	/* Attributes */
 	
-	private RestrictTypesAdapter adapter;
+	private OfferedTypesAdapter adapter;
 	
 	private SudokuTypesList types;
 	
@@ -178,7 +178,7 @@ public class RestrictTypesActivity extends SudoqListActivity implements OnItemCl
 	{
 		types = Profile.getInstance().getAssistances().getWantedTypesList();
 		// initialize ArrayAdapter for the type names and set it
-		adapter = new RestrictTypesAdapter(this, types);
+		adapter = new OfferedTypesAdapter(this, types);
 		setListAdapter(adapter);
 		getListView().setOnItemClickListener(this);
 		getListView().setOnItemLongClickListener(this);

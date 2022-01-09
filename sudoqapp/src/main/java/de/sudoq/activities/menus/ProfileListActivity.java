@@ -17,14 +17,14 @@ import android.widget.ArrayAdapter;
 import java.util.ArrayList;
 
 import de.sudoq.R;
-import de.sudoq.activities.SudoqListActivity;
+import de.sudoq.activities.SudoQListActivity;
 import de.sudoq.model.profile.Profile;
 
 /**
  * Diese Klasse stellt eine Acitivity zur Anzeige und Auswahl von
  * Spielerprofilen dar.
  */
-public class ProfileListActivity extends SudoqListActivity implements OnItemClickListener
+public class ProfileListActivity extends SudoQListActivity implements OnItemClickListener
 {
 	/* Attributes */
 	

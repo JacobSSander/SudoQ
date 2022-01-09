@@ -158,8 +158,8 @@ public class NewSudokuPreferencesActivity extends PreferencesActivity
 	/* parameter View only needed to be foud by xml who clicks this*/
 	public void switchToAdvancedPreferences(View view)
 	{
-		Intent advIntent = new Intent(this, AdvancedPreferencesActivity.class);
-		AdvancedPreferencesActivity.caller = AdvancedPreferencesActivity.ParentActivity.NEW_SUDOKU;
+		Intent advIntent = new Intent(this, AdvancedSettingsActivity.class);
+		AdvancedSettingsActivity.caller = AdvancedSettingsActivity.ParentActivity.NEW_SUDOKU;
 		startActivity(advIntent);
 	}
 }

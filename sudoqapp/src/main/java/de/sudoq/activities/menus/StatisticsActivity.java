@@ -13,7 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.widget.TextView;
 
 import de.sudoq.R;
-import de.sudoq.activities.SudoqCompatActivity;
+import de.sudoq.activities.SudoQCompatActivity;
 import de.sudoq.activities.sudoku.SudokuActivity;
 import de.sudoq.model.profile.Profile;
 import de.sudoq.model.profile.Statistics;
@@ -22,7 +22,7 @@ import de.sudoq.model.profile.Statistics;
  * Diese Klasse stellt eine Activity zur Anzeige der Statisik des aktuellen
  * Spielerprofils dar.
  */
-public class StatisticsActivity extends SudoqCompatActivity
+public class StatisticsActivity extends SudoQCompatActivity
 {
 	/* Methods */
 	

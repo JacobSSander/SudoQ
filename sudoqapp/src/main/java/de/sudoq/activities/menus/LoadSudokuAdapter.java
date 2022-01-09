@@ -38,10 +38,10 @@ import de.sudoq.model.game.GameData;
 /**
  * Adapter für die Anzeige aller Spiele des Spielers
  */
-public class SudokuLoadingAdapter extends ArrayAdapter<GameData>
+public class LoadSudokuAdapter extends ArrayAdapter<GameData>
 {
 	private static final float THUMBNAIL_SIZE = 0.5f;
-	private static final String LOG_TAG = SudokuLoadingAdapter.class.getSimpleName();
+	private static final String LOG_TAG = LoadSudokuAdapter.class.getSimpleName();
 	private final Context context;
 	private final List<GameData> gameDatas;
 	
@@ -51,7 +51,7 @@ public class SudokuLoadingAdapter extends ArrayAdapter<GameData>
 	 * @param context der Applikationskontext
 	 * @param games die Liste der games
 	 */
-	public SudokuLoadingAdapter(Context context, List<GameData> games)
+	public LoadSudokuAdapter(Context context, List<GameData> games)
 	{
 		super(context, R.layout.sudokuloadingitem, games);
 		this.context = context;
@@ -94,7 +94,7 @@ public class SudokuLoadingAdapter extends ArrayAdapter<GameData>
 		catch(OutOfMemoryError e)
 		{
 			Toast.makeText(context, context.getString(R.string.toast_stop_that), Toast.LENGTH_LONG).show();
-			((SudokuLoadingActivity) context).finish();
+			((LoadSudokuActivity) context).finish();
 		}
 		
 		sudokuType.setText(Utility.type2string(getContext(), gameDatas.get(position).getType()));

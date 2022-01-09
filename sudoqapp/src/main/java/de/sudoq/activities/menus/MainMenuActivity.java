@@ -20,23 +20,22 @@ import android.widget.Button;
 import java.util.Locale;
 
 import de.sudoq.R;
-import de.sudoq.activities.SudoqCompatActivity;
+import de.sudoq.activities.SudoQCompatActivity;
 import de.sudoq.controller.language.LanguageSetting;
 import de.sudoq.controller.language.LanguageUtility;
-import de.sudoq.activities.menus.preferences.PlayerPreferencesActivity;
+import de.sudoq.activities.menus.preferences.UserPreferencesActivity;
 import de.sudoq.activities.sudoku.SudokuActivity;
 import de.sudoq.model.profile.Profile;
 
 /**
  * Verwaltet das Hauptmenü der App.
  */
-public class MainActivity extends SudoqCompatActivity
+public class MainMenuActivity extends SudoQCompatActivity
 {
 	/**
 	 * Der Log-Tag für den LogCat
 	 */
-	@SuppressWarnings("unused")
-	private static final String LOG_TAG = MainActivity.class.getSimpleName();
+	private static final String LOG_TAG = MainMenuActivity.class.getSimpleName();
 	
 	/**
 	 * stores language at activity start to compare if language changed in advanced preferences
@@ -145,12 +144,12 @@ public class MainActivity extends SudoqCompatActivity
 				break;
 			
 			case R.id.button_mainmenu_load_sudoku:
-				Intent loadSudokuIntent = new Intent(this, SudokuLoadingActivity.class);
+				Intent loadSudokuIntent = new Intent(this, LoadSudokuActivity.class);
 				startActivity(loadSudokuIntent);
 				break;
 			
 			case R.id.button_mainmenu_profile:
-				Intent preferencesIntent = new Intent(this, PlayerPreferencesActivity.class);
+				Intent preferencesIntent = new Intent(this, UserPreferencesActivity.class);
 				startActivity(preferencesIntent);
 				break;
 		}

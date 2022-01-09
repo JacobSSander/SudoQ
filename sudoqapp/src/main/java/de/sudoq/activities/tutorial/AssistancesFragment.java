@@ -7,13 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import de.sudoq.R;
-//import android.support.v7.widget.RecyclerView;
 
-public class FragmentActionTree extends Fragment
+public class AssistancesFragment extends Fragment
 {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup group, Bundle saved)
 	{
-		return inflater.inflate(R.layout.tutorial_actiontree, group, false);
+		return inflater.inflate(R.layout.tutorial_assistances, group, false);
 	}
 }

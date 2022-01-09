@@ -27,7 +27,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import de.sudoq.R;
-import de.sudoq.activities.menus.MainActivity;
+import de.sudoq.activities.menus.MainMenuActivity;
 import de.sudoq.controller.menu.Utility;
 import de.sudoq.model.files.FileManager;
 import de.sudoq.model.profile.Profile;
@@ -39,7 +39,7 @@ import de.sudoq.model.sudoku.sudokuTypes.SudokuTypes;
  * sowie den FileManager initialisiert und die Daten für den ersten Start
  * vorbereitet.
  */
-public class SplashActivity extends SudoqCompatActivity
+public class SplashActivity extends SudoQCompatActivity
 {
 	/**
 	 * Das Log-Tag für das LogCat.
@@ -315,7 +315,7 @@ public class SplashActivity extends SudoqCompatActivity
 		finish();
 		// overridePendingTransition(android.R.anim.fade_in,
 		// android.R.anim.fade_out);
-		Intent startMainMenuIntent = new Intent(this, MainActivity.class);
+		Intent startMainMenuIntent = new Intent(this, MainMenuActivity.class);
 		// startMainMenuIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 		startActivity(startMainMenuIntent);
 		// overridePendingTransition(android.R.anim.fade_in,

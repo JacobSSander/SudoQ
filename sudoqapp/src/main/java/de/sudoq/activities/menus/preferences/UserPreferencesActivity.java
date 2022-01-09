@@ -35,10 +35,10 @@ import de.sudoq.model.profile.Profile;
  * Activity um Profile zu bearbeiten und zu verwalten
  * aufgerufen im Hauptmenü 4. Button
  */
-public class PlayerPreferencesActivity extends PreferencesActivity
+public class UserPreferencesActivity extends PreferencesActivity
 {
 	/** Attributes */
-	private static final String LOG_TAG = PlayerPreferencesActivity.class.getSimpleName();
+	private static final String LOG_TAG = UserPreferencesActivity.class.getSimpleName();
 	
 	/**
 	 * Konstante um anzuzeigen, dass nur die Assistences konfiguriert werden
@@ -237,8 +237,8 @@ public class PlayerPreferencesActivity extends PreferencesActivity
 	/* parameter View only needed to be found by xml who clicks this */
 	public void switchToAdvancedPreferences(View view)
 	{
-		Intent advIntent = new Intent(this, AdvancedPreferencesActivity.class);
-		AdvancedPreferencesActivity.caller = AdvancedPreferencesActivity.ParentActivity.PROFILE;
+		Intent advIntent = new Intent(this, AdvancedSettingsActivity.class);
+		AdvancedSettingsActivity.caller = AdvancedSettingsActivity.ParentActivity.PROFILE;
 		//AdvancedPreferencesActivity.gameSettings = this.gameSettings;
 		startActivity(advIntent);
 	}

@@ -26,9 +26,9 @@ import de.sudoq.model.xml.SudokuTypesList;
 /**
  * Adapter für die Anzeige aller zu wählenden Sudoku Typen
  */
-public class RestrictTypesAdapter extends ArrayAdapter<SudokuTypes>
+public class OfferedTypesAdapter extends ArrayAdapter<SudokuTypes>
 {
-	private static final String LOG_TAG = RestrictTypesAdapter.class.getSimpleName();
+	private static final String LOG_TAG = OfferedTypesAdapter.class.getSimpleName();
 	private final Context context;
 	private final List<SudokuTypes> types;
 	
@@ -38,7 +38,7 @@ public class RestrictTypesAdapter extends ArrayAdapter<SudokuTypes>
 	 * @param context der Applikationskontext
 	 * @param typesList die Liste der Typen
 	 */
-	public RestrictTypesAdapter(Context context, SudokuTypesList typesList)
+	public OfferedTypesAdapter(Context context, SudokuTypesList typesList)
 	{
 		super(context, R.layout.restricttypes_item, typesList.getAllTypes());
 		this.context = context;

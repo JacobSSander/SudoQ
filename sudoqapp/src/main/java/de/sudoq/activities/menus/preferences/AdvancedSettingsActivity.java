@@ -33,15 +33,15 @@ import de.sudoq.controller.language.LanguageUtility;
 import de.sudoq.model.game.GameSettings;
 import de.sudoq.model.profile.Profile;
 
-import static de.sudoq.activities.menus.preferences.AdvancedPreferencesActivity.ParentActivity.NOT_SPECIFIED;
+import static de.sudoq.activities.menus.preferences.AdvancedSettingsActivity.ParentActivity.NOT_SPECIFIED;
 
 /**
  * Activity um Profile zu bearbeiten und zu verwalten
  */
-public class AdvancedPreferencesActivity extends PreferencesActivity
+public class AdvancedSettingsActivity extends PreferencesActivity
 {
 	/** Attributes */
-	private static final String LOG_TAG = AdvancedPreferencesActivity.class.getSimpleName();
+	private static final String LOG_TAG = AdvancedSettingsActivity.class.getSimpleName();
 	
 	public enum ParentActivity
 	{
@@ -166,7 +166,7 @@ public class AdvancedPreferencesActivity extends PreferencesActivity
 				
 				LanguageUtility.setConfLocale(newCode.language.name(), thishere);
 				
-				LanguageUtility.storeLanguageToMemory2(AdvancedPreferencesActivity.this, newCode);
+				LanguageUtility.storeLanguageToMemory2(AdvancedSettingsActivity.this, newCode);
 				//int previous = LanguageUtility.loadLanguageFromConf(AdvancedPreferencesActivity.this).name();
 				
 				if(!currentLanguageCode.language.equals(newCode.language))
@@ -206,7 +206,7 @@ public class AdvancedPreferencesActivity extends PreferencesActivity
 	public void selectTypesToRestrict(View view)
 	{
 		Log.d("gameSettings", "AdvancedPreferencesActivity.selectTypesToRestrict");
-		startActivity(new Intent(this, RestrictTypesActivity.class));
+		startActivity(new Intent(this, OfferedTypesActivity.class));
 	}
 	
 	public void helperSelected(final View view)

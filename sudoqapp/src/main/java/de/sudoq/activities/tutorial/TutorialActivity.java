@@ -104,9 +104,9 @@ public class TutorialActivity extends AppCompatActivity
 	private void setupViewPager(ViewPager viewPager)
 	{
 		Adapter adapter = new Adapter(getSupportFragmentManager());
-		adapter.addFragment(new FragmentSudoku(), getString(R.string.sf_tutorial_sudoku_title));
-		adapter.addFragment(new FragmentAssistances(), getString(R.string.sf_tutorial_assistances_title));
-		adapter.addFragment(new FragmentActionTree(), getString(R.string.sf_tutorial_action_title));
+		adapter.addFragment(new SudokuFragment(), getString(R.string.sf_tutorial_sudoku_title));
+		adapter.addFragment(new AssistancesFragment(), getString(R.string.sf_tutorial_assistances_title));
+		adapter.addFragment(new ActionTreeFragment(), getString(R.string.sf_tutorial_action_title));
 		viewPager.setAdapter(adapter);
 	}
 

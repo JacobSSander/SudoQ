@@ -26,7 +26,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import de.sudoq.R;
-import de.sudoq.activities.SudoqCompatActivity;
+import de.sudoq.activities.SudoQCompatActivity;
 import de.sudoq.activities.menus.preferences.NewSudokuPreferencesActivity;
 import de.sudoq.activities.sudoku.SudokuActivity;
 import de.sudoq.controller.menu.StringAndEnum;
@@ -47,7 +47,7 @@ import de.sudoq.model.xml.XmlTree;
  *
  * Hauptmenü -> "neues Sudoku" führt hierher 
  */
-public class NewSudokuActivity extends SudoqCompatActivity
+public class NewSudokuActivity extends SudoQCompatActivity
 {
 	/* Attributes */
 	
