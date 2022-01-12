@@ -8,7 +8,6 @@
 package de.sudoq.activities.menus.preferences;
 
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
@@ -19,8 +18,6 @@ import android.widget.CheckBox;
 
 import de.sudoq.R;
 import de.sudoq.activities.menus.NewSudokuActivity;
-import de.sudoq.controller.language.LanguageSetting;
-import de.sudoq.controller.language.LanguageUtility;
 import de.sudoq.model.game.Assistances;
 import de.sudoq.model.game.GameSettings;
 import de.sudoq.model.profile.Profile;
@@ -32,11 +29,6 @@ public class NewSudokuPreferencesActivity extends PreferencesActivity
 {
 	// shortcut for NewSudokuActivity.gameSettings
 	GameSettings confSettings;
-	
-	/**
-	 * stores language at activity start to compare if language changed in advanced preferences
-	 */
-	private LanguageSetting currentLanguageCode;
 	
 	/**
 	 * Wird aufgerufen, falls die Activity zum ersten Mal gestartet wird. ?Läd
@@ -73,30 +65,6 @@ public class NewSudokuPreferencesActivity extends PreferencesActivity
 		restrictCandidates.setChecked(confSettings.getAssistance(Assistances.restrictCandidates));
 		
 		Profile.getInstance().registerListener(this);
-		
-		//set and store language at beginning of activity lifecycle
-		currentLanguageCode = LanguageUtility.loadLanguageFromSharedPreferences(this);
-	}
-	
-	@Override
-	public void onResume()
-	{
-		super.onResume();
-		
-		//load language from memory
-		LanguageSetting fromMemory = LanguageUtility.loadLanguageFromSharedPreferences(this);
-		if(!fromMemory.language.equals(currentLanguageCode.language))
-		{
-			Intent refresh = new Intent(this, this.getClass());
-			this.finish();
-			this.startActivity(refresh);
-		}
-	}
-	
-	@Override
-	public void onConfigurationChanged(Configuration newConfig)
-	{
-		super.onConfigurationChanged(newConfig);
 	}
 	
 	/**

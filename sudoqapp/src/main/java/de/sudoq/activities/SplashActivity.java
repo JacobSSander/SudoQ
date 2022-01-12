@@ -26,8 +26,11 @@ import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import androidx.annotation.NonNull;
 import de.sudoq.R;
 import de.sudoq.activities.menus.MainMenuActivity;
+import de.sudoq.controller.language.LanguageCode;
+import de.sudoq.controller.language.LanguageUtility;
 import de.sudoq.controller.menu.Utility;
 import de.sudoq.model.files.FileManager;
 import de.sudoq.model.profile.Profile;
@@ -90,6 +93,17 @@ public class SplashActivity extends SudoQCompatActivity
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+		
+		// Load the language setting from preferences:
+		LanguageCode languageCode = LanguageUtility.loadLanguageCodeFromPreferences(this);
+		Log.i("SudoQLanguage", "Using language setting: " + languageCode);
+		// If the desired language is not 'system' and not the current system language, update the resources (globally):
+		if(languageCode != LanguageCode.system && languageCode != LanguageUtility.resolveSystemLanguage())
+		{
+			LanguageUtility.setResourceLocale(this, languageCode);
+		}
+		// This should be applied app wide until manual preference changes.
+		// If something else changes the locale for reasons, it will be noticed.
 		
 		//setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		setContentView(R.layout.splash);
@@ -301,7 +315,7 @@ public class SplashActivity extends SudoQCompatActivity
 	}
 	
 	@Override
-	public void onConfigurationChanged(Configuration newConfig)
+	public void onConfigurationChanged(@NonNull Configuration newConfig)
 	{
 		super.onConfigurationChanged(newConfig);
 		//setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);

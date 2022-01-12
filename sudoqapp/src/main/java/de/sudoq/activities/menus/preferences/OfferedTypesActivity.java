@@ -9,6 +9,7 @@ package de.sudoq.activities.menus.preferences;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
@@ -123,7 +124,7 @@ public class OfferedTypesActivity extends SudoQListActivity implements OnItemCli
 	}
 	
 	@Override
-	public void onConfigurationChanged(Configuration newConfig)
+	public void onConfigurationChanged(@NonNull Configuration newConfig)
 	{
 		super.onConfigurationChanged(newConfig);
 		//setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);

@@ -25,7 +25,7 @@ import de.sudoq.model.files.FileManager;
  * Eine Activity, welche die für einwandfreie Funktionalität der SudoQ-App
  * notwendigen Initialisierungsarbeiten ausführt.
  */
-public abstract class SudoQCompatActivity extends AppCompatActivity
+public abstract class SudoQCompatActivity extends LanguageAdaptingCompatActivity
 {
 	/**
 	 * Initialisiert eine neue Activity, setzt dabei die für die App notwendigen

@@ -8,7 +8,6 @@
 package de.sudoq.activities.menus.preferences;
 
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
@@ -25,8 +24,6 @@ import java.util.List;
 import de.sudoq.R;
 import de.sudoq.activities.menus.ProfileListActivity;
 import de.sudoq.activities.menus.StatisticsActivity;
-import de.sudoq.controller.language.LanguageSetting;
-import de.sudoq.controller.language.LanguageUtility;
 import de.sudoq.model.game.Assistances;
 import de.sudoq.model.game.GameSettings;
 import de.sudoq.model.profile.Profile;
@@ -57,11 +54,6 @@ public class UserPreferencesActivity extends PreferencesActivity
 	boolean firstStartup;
 	
 	GameSettings gameSettings;
-	
-	/**
-	 * stores language at activity start to compare if language changed in advanced preferences
-	 */
-	private LanguageSetting currentLanguageCode;
 	
 	/**
 	 * Wird aufgerufen, falls die Activity zum ersten Mal gestartet wird. Läd
@@ -97,52 +89,10 @@ public class UserPreferencesActivity extends PreferencesActivity
 		createProfile = true;
 		
 		Profile.getInstance().registerListener(this);
-		
-		//store language at beginning of activity lifecycle
-		currentLanguageCode = LanguageUtility.loadLanguageFromSharedPreferences2(this);
-	}
-	
-	@Override
-	public void onResume()
-	{
-		super.onResume();
-		
-		//load language from memory
-		//LanguageSetting fromMemory = LanguageUtility.loadLanguageFromSharedPreferences2(this);
-		LanguageSetting.LanguageCode fromConf = LanguageUtility.getConfLocale(this);
-		
-		if(!fromConf.equals(currentLanguageCode.language))
-		{
-			Intent refresh = new Intent(this, this.getClass());
-			this.finish();
-			this.startActivity(refresh);
-		}
-	}
-	
-	@Override
-	public void onConfigurationChanged(Configuration newConfig)
-	{
-		super.onConfigurationChanged(newConfig);
-		// check if configuration has changed
-		// per Manifest this method gets called if there are changes in layoutDirection or locale
-		// (if we only check for locale, this method doesn't get called, no idea why https://stackoverflow.com/a/27648673/3014199)
-		//
-		if(!newConfig.locale.getLanguage().equals(currentLanguageCode.language.name()))
-		{
-			//only adopt external change if language is set to "system language"
-			if(currentLanguageCode.isSystemLanguage())
-			{
-				//adopt change
-				currentLanguageCode.language = LanguageUtility.loadLanguageFromLocale();
-				//store changes
-				LanguageUtility.storeLanguageToMemory2(this, currentLanguageCode);
-			}
-		}
 	}
 	
 	/**
 	 * Aktualisiert die Werte in den Views
-	 *
 	 */
 	@Override
 	protected void refreshValues()

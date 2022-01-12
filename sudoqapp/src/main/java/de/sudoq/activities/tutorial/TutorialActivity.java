@@ -16,7 +16,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MotionEvent;
@@ -26,8 +25,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.sudoq.R;
+import de.sudoq.activities.LanguageAdaptingCompatActivity;
 
-public class TutorialActivity extends AppCompatActivity
+public class TutorialActivity extends LanguageAdaptingCompatActivity
 {
 	//private DrawerLayout mDrawerLayout;
 	

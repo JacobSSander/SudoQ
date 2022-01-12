@@ -15,6 +15,7 @@ import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import androidx.annotation.NonNull;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -192,7 +193,7 @@ public class LoadSudokuActivity extends SudoQListActivity implements OnItemClick
 	}
 	
 	@Override
-	public void onConfigurationChanged(Configuration newConfig)
+	public void onConfigurationChanged(@NonNull Configuration newConfig)
 	{
 		super.onConfigurationChanged(newConfig);
 		//setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);

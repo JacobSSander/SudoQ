@@ -8,7 +8,6 @@
 package de.sudoq.activities.menus;
 
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
@@ -275,11 +274,5 @@ public class NewSudokuActivity extends SudoQCompatActivity
 	{
 		Intent assistancesIntent = new Intent(this, NewSudokuPreferencesActivity.class);
 		startActivity(assistancesIntent);
-	}
-	
-	@Override
-	public void onConfigurationChanged(Configuration newConfig)
-	{
-		super.onConfigurationChanged(newConfig);
 	}
 }

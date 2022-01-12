@@ -1,6 +1,5 @@
 package de.sudoq.controller.language;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -10,94 +9,121 @@ import android.util.Log;
 
 import java.util.Locale;
 
+/**
+ * This class provides several utility functions, for dealing with language management.
+ */
 public class LanguageUtility
 {
-	private final static String SUDOQ_SHARED_PREFS_FILE = "SudoqSharedPrefs";
+	// ### Language preferences: ###
 	
-	/* save languagesetting to two values*/
+	/**
+	 * Name of the preferences.
+	 */
+	private static final String SUDOQ_SHARED_PREFS_FILE = "SudoqSharedPrefs";
+	/**
+	 * The language key.
+	 */
+	private static final String LANGUAGE_KEY = "language";
 	
-	public static LanguageSetting loadLanguageFromSharedPreferences(Activity a)
+	/**
+	 * Loads the {@link LanguageCode} from preferences. Defaults to system.
+	 *
+	 * @param context a {@link Context} of this application (any activity)
+	 * @return the {@link LanguageCode} stored in the settings, or system
+	 */
+	public static LanguageCode loadLanguageCodeFromPreferences(Context context)
 	{
-		SharedPreferences sp = a.getSharedPreferences(SUDOQ_SHARED_PREFS_FILE, Context.MODE_PRIVATE);
-		String code = sp.getString("language", "system_en");
-		return LanguageSetting.fromStorableString(code);
-	}
-	
-	/* save language to enum */
-	
-	public static LanguageSetting loadLanguageFromSharedPreferences2(Activity a)
-	{
-		SharedPreferences sp = a.getSharedPreferences(SUDOQ_SHARED_PREFS_FILE, Context.MODE_PRIVATE);
-		String code = sp.getString("language", "system");
-		LanguageSetting.LanguageCode langEnum = LanguageSetting.LanguageCode.valueOf(code);
-		
-		if(langEnum.equals(LanguageSetting.LanguageCode.system))
-		{
-			return new LanguageSetting(loadLanguageFromLocale(), true);
-		}
-		else
-		{
-			return new LanguageSetting(langEnum, false);
-		}
+		SharedPreferences sharedPreferences = context.getSharedPreferences(SUDOQ_SHARED_PREFS_FILE, Context.MODE_PRIVATE);
+		String languageCodeOrSystem = sharedPreferences.getString(LANGUAGE_KEY, LanguageCode.system.name());
+		return LanguageCode.getFromString(languageCodeOrSystem);
 	}
 	
 	/**
-	 * @param langSetting
+	 * Stores a {@link LanguageCode} to preferences.
+	 *
+	 * @param context a {@link Context} of this application (any activity)
+	 * @param languageCode the {@link LanguageCode} to store in the preferences
 	 */
-	public static void storeLanguageToMemory2(Activity a, LanguageSetting langSetting)
+	public static void saveLanguageCodeToPreferences(Context context, LanguageCode languageCode)
 	{
-		LanguageSetting.LanguageCode langEnum = langSetting.isSystemLanguage()
-				? LanguageSetting.LanguageCode.system
-				: langSetting.language;
-		
-		SharedPreferences sp = a.getSharedPreferences(SUDOQ_SHARED_PREFS_FILE, Context.MODE_PRIVATE);
+		SharedPreferences sp = context.getSharedPreferences(SUDOQ_SHARED_PREFS_FILE, Context.MODE_PRIVATE);
 		sp.edit()
-				.putString("language", langEnum.name())
+				.putString(LANGUAGE_KEY, languageCode.name())
 				.apply();
 	}
 	
-	/* save language to enum */
+	// ### System language: ###
 	
-	public static LanguageSetting.LanguageCode loadLanguageFromLocale()
+	/**
+	 * Finds the {@link LanguageCode} for the current system language. If the system language has no translation/is unknown English is chosen.
+	 *
+	 * @return the {@link LanguageCode} for the system language, or if unknown for english
+	 */
+	public static LanguageCode resolveSystemLanguage()
 	{
-		//use english as default
 		String code = Locale.getDefault().getLanguage();
-		for(LanguageSetting.LanguageCode l : LanguageSetting.LanguageCode.values())
+		return LanguageCode.getFromLanguageCode(code);
+	}
+	
+	// ### Resource language: ###
+	
+	/**
+	 * Gets the {@link LanguageCode} for the currently chosen resource language.
+	 * There are only 3 possible resource languages, if however the resource is something else, this returns English.
+	 *
+	 * @param context a {@link Context} of this application (any activity)
+	 * @return the {@link LanguageCode} which the resource is set to
+	 */
+	public static LanguageCode getResourceLanguageCode(Context context)
+	{
+		Resources resources = context.getResources();
+		Configuration configuration = resources.getConfiguration();
+		String languageCode = configuration.locale.getLanguage();
+		return LanguageCode.getFromLanguageCode(languageCode);
+	}
+	
+	/**
+	 * Sets the locale of the resources to a provided language.
+	 *
+	 * @param context a {@link Context} of this application (any activity)
+	 * @param languageCode the {@link LanguageCode} which the resources should be set to
+	 * @throws IllegalArgumentException if the {@link LanguageCode} for system was supplied
+	 */
+	public static void setResourceLocale(Context context, LanguageCode languageCode)
+	{
+		Log.d("SudoQLanguage", "Setting resource from context '" + context.getClass().getSimpleName() + "' to '" + languageCode + "'");
+		if(languageCode == LanguageCode.system)
 		{
-			if(code.equals(l.name()))
-			{
-				return l;
-			}
+			throw new IllegalArgumentException("The resource locale may never be set to system!");
 		}
-		return LanguageSetting.LanguageCode.en;
+		Locale newLocale = new Locale(languageCode.name());
+		Resources resources = context.getResources();
+		DisplayMetrics displayMetrics = resources.getDisplayMetrics();
+		Configuration configuration = resources.getConfiguration();
+		configuration.locale = newLocale;
+		resources.updateConfiguration(configuration, displayMetrics);
 	}
 	
-	public static LanguageSetting.LanguageCode getConfLocale(Activity a)
-	{
-		Resources res = a.getResources();
-		Configuration conf = res.getConfiguration();
-		String code = conf.locale.getLanguage();
-		return LanguageSetting.LanguageCode.valueOf(code);
-	}
+	// ### App language: ###
 	
-	public static void setConfLocale(String lang, Activity a)
+	/**
+	 * Returns the {@link LanguageCode} which the the app should currently be displaying.
+	 * If the setting points to system, the system language is resolved, fallback is English.
+	 *
+	 * @param context a {@link Context} of this application (any activity)
+	 * @return the {@link LanguageCode} representing the current language to use, never system
+	 */
+	public static LanguageCode getDesiredLanguage(Context context)
 	{
-		Log.i("lang", "setLocale( " + lang + ", " + a.getClass().getSimpleName() + ")");
-		
-		Locale myLocale = new Locale(lang);
-		Resources res = a.getResources();
-		DisplayMetrics dm = res.getDisplayMetrics();
-		Configuration conf = res.getConfiguration();
-		conf.locale = myLocale;
-		res.updateConfiguration(conf, dm);
-	}
-	
-	public static LanguageSetting getLanguageFromItem(LanguageSetting.LanguageCode i)
-	{
-		boolean system = i.equals(LanguageSetting.LanguageCode.system);
-		LanguageSetting.LanguageCode language = system
-				? LanguageSetting.LanguageCode.valueOf(Locale.getDefault().getLanguage())
-				: i;
-		return new LanguageSetting(language, system);
+		LanguageCode languageCode = loadLanguageCodeFromPreferences(context);
+		if(languageCode == LanguageCode.system)
+		{
+			//Load system language:
+			return resolveSystemLanguage();
+		}
+		else
+		{
+			return languageCode;
+		}
 	}
 }

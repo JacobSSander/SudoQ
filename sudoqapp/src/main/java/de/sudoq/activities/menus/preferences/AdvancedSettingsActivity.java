@@ -7,7 +7,6 @@
  */
 package de.sudoq.activities.menus.preferences;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -28,7 +27,7 @@ import android.widget.Spinner;
 
 import de.sudoq.R;
 import de.sudoq.activities.menus.NewSudokuActivity;
-import de.sudoq.controller.language.LanguageSetting;
+import de.sudoq.controller.language.LanguageCode;
 import de.sudoq.controller.language.LanguageUtility;
 import de.sudoq.model.game.GameSettings;
 import de.sudoq.model.profile.Profile;
@@ -62,13 +61,7 @@ public class AdvancedSettingsActivity extends PreferencesActivity
 	
 	Byte debugCounter = 0;
 	
-	private int lastSelectedLanguageItem = 0;
 	private boolean langSpinnerInit = true;
-	
-	/**
-	 * stores language at activity start to compare if language changed in advanced preferences
-	 */
-	private LanguageSetting currentLanguageCode;
 	
 	/**
 	 * Wird aufgerufen, falls die Activity zum ersten Mal gestartet wird. Läd
@@ -124,7 +117,8 @@ public class AdvancedSettingsActivity extends PreferencesActivity
 		
 		Profile.getInstance().registerListener(this);
 		
-		/** language spinner **/
+		// Language spinner/management:
+		
 		final Spinner languageSpinner = findViewById(R.id.spinner_language);
 		
 		ArrayAdapter<CharSequence> languageAdapter = ArrayAdapter.createFromResource(this,
@@ -133,13 +127,10 @@ public class AdvancedSettingsActivity extends PreferencesActivity
 		languageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		languageSpinner.setAdapter(languageAdapter);
 		
-		final Activity thishere = this;
-		
 		//set language
-		currentLanguageCode = LanguageUtility.loadLanguageFromSharedPreferences2(this);
-		Log.d("lang", "set language to AdvancedPreferencesActivity.onCreate() after setLocaleFromMemory.");
+		LanguageCode languageCode = LanguageUtility.loadLanguageCodeFromPreferences(this);
 		
-		languageSpinner.setSelection(currentLanguageCode.isSystemLanguage() ? 0 : currentLanguageCode.language.ordinal());
+		languageSpinner.setSelection(languageCode.ordinal());
 		// nested Listener for languageSpinner
 		languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
 		{
@@ -153,31 +144,30 @@ public class AdvancedSettingsActivity extends PreferencesActivity
 					return;
 				}
 				
-				//if position is out of array bounds set to 0 (= system language).
-				if(pos >= LanguageSetting.LanguageCode.values().length)
+				// If position is out of bounds set it to the system language index:
+				if(pos >= LanguageCode.values().length)
 				{
-					pos = 0;
+					pos = LanguageCode.system.ordinal();
 				}
 				
-				//translate pos to enum
-				LanguageSetting.LanguageCode enumCode = LanguageSetting.LanguageCode.values()[pos];
-				//enum to string(resolving system language) and set
-				LanguageSetting newCode = LanguageUtility.getLanguageFromItem(enumCode);
+				// Translate the position to enum language value:
+				LanguageCode enumCode = LanguageCode.values()[pos];
 				
-				LanguageUtility.setConfLocale(newCode.language.name(), thishere);
+				// Store the chosen language setting to preferences:
+				LanguageUtility.saveLanguageCodeToPreferences(AdvancedSettingsActivity.this, enumCode);
 				
-				LanguageUtility.storeLanguageToMemory2(AdvancedSettingsActivity.this, newCode);
-				//int previous = LanguageUtility.loadLanguageFromConf(AdvancedPreferencesActivity.this).name();
-				
-				if(!currentLanguageCode.language.equals(newCode.language))
+				// Resolve the enum language if system:
+				LanguageCode newLanguageCode = enumCode;
+				if(newLanguageCode == LanguageCode.system)
 				{
-					//if we change e.g. from system(english) to english we need to store a different value but we don't need to refresh.
-					
-					//restart activity so changes can take placem
-					Intent refresh = new Intent(thishere, thishere.getClass());
-					thishere.finish();
-					thishere.startActivity(refresh);
+					// Either the real system language (if possible) or english will be applied here:
+					newLanguageCode = LanguageUtility.resolveSystemLanguage();
 				}
+				// Apply the new language choice to the resources (regardless if it is the same):
+				LanguageUtility.setResourceLocale(AdvancedSettingsActivity.this, newLanguageCode);
+				
+				// Restart this activity (if required):
+				restartIfWrongLanguage();
 			}
 			
 			public void onNothingSelected(AdapterView<?> parent)
