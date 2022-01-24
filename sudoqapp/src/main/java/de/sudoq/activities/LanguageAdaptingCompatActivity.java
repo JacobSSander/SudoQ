@@ -80,6 +80,10 @@ public abstract class LanguageAdaptingCompatActivity extends AppCompatActivity
 	protected void restartThisActivity()
 	{
 		Intent intent = new Intent(this, getClass());
+		//This flag will remove any instances of the current activity, and any following activities from the back stack.
+		// Needed for older Android versions, which do not consider the previous 'finish()' call. (Works for version 9, doesn't for version 7, version 8 is untested).
+		// The description of this flag might not allow an activity to exist more than once on the stack, but that is fine for the use case of this application.
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		finish();
 		startActivity(intent);
 		overridePendingTransition(0, 0);
