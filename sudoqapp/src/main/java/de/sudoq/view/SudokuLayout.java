@@ -270,8 +270,6 @@ public class SudokuLayout extends RelativeLayout implements ObservableCellIntera
 		hintPainter.invalidateAll();
 	}
 	
-	public float focusX, focusY;
-	
 	/**
 	 * Zoom so heraus, dass ein diese View optimal in ein Layout der
 	 * spezifizierte Größe passt

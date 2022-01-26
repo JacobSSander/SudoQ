@@ -13,157 +13,210 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import androidx.annotation.NonNull;
 
 /**
- * Eine ScrollView, welche sowohl horizontales, als auch vertikales Scrollen ermöglicht.
+ * A ScrollView which allows vertical and horizontal scrolling.
  */
-public class FullScrollLayout extends LinearLayout
+public class FullScrollLayout extends FrameLayout
 {
-	/**
-	 * Der Log-Tag
-	 */
 	private static final String LOG_TAG = FullScrollLayout.class.getSimpleName();
 	
 	/**
-	 * Der aktuelle Zoom Faktor.
+	 * The current zoom factor. Responsible for scaling the child view.
 	 */
 	private float zoomFactor;
 	
 	/**
-	 * Der View, der horizontales Scrollen erlaubt und im View für vertikales Scrollen enthalten ist.
+	 * The view in charge of horizontal scrolling.
+	 *  It will be wrapped within the vertical scroll view.
 	 */
 	private HorizontalScroll horizontalScrollView;
 	
 	/**
-	 * Der View, der vertikales Scrollen erlaubt und den View für horizontales Scrollen enthällt.
+	 * The view in charge of the vertical scrolling.
+	 *  It will be the parent of the horizontal scroll view.
+	 *  And the only child of this view.
 	 */
 	private VerticalScroll verticalScrollView;
 	
 	/**
-	 * Aktueller X- und Y-Wert der ScrollViews.
-	 */
-	private Point current = new Point(0, 0);
-	
-	/**
-	 * Der Zoom-Gesten-Detektor
+	 * The zoom-gesture-detector. Will detect the pinch gesture.
+	 *  It is not hooked into anything, and touch events will be delivered manually to this detector.
 	 */
 	private ScaleGestureDetector scaleGestureDetector;
 	
 	/**
-	 * Die View, die sich in diesem FullScrollLayout befindet.
+	 * The child view, which is to be zoomed and scrolled within this FullScrollLayout view.
 	 */
 	private ZoomableView childView;
 	
-	
 	/**
-	 * Instanziiert ein neues ScrollLayout mit den gegebenen Parametern
+	 * Creates a new ScrollLayout with given parameters.
 	 *
-	 * @param context der Applikationskontext
-	 * @param set das Android AttributeSet
+	 * @param context the context in charge of this view
+	 * @param attributeSet the AttributeSet containing layout properties
 	 */
-	public FullScrollLayout(Context context, AttributeSet set)
+	public FullScrollLayout(Context context, AttributeSet attributeSet)
 	{
-		super(context, set);
-		initialize();
-		this.scaleGestureDetector = new ScaleGestureDetector(context, new ScaleGestureListener());
+		super(context, attributeSet);
+		initialize(context);
 	}
 	
 	/**
-	 * Instanziiert ein neues FullScrollLayout, welches auf Wunsch als qudratisch festgelegt wird.
+	 * Creates a new ScrollLayout with given parameters.
 	 *
-	 * @param context Der Kontext, in dem dieses Layout angelegt wird
+	 * @param context the context in charge of this view
 	 */
 	public FullScrollLayout(Context context)
 	{
 		super(context);
-		initialize();
-		this.scaleGestureDetector = new ScaleGestureDetector(context, new ScaleGestureListener());
+		initialize(context);
 	}
 	
 	/**
-	 * Initialisiert ein neues Layout.
+	 * Private instantiation code.
+	 *
+	 * @param context the context in charge of this view
 	 */
-	private void initialize()
+	private void initialize(Context context)
 	{
+		this.scaleGestureDetector = new ScaleGestureDetector(context, new ScaleGestureListener());
+		
+		//In case that there was any child view provided by an XML layout file, it will be removed here.
 		this.removeAllViews();
 		
+		//TODO: Why is this not directly set in the field? There is no "good" way to change this value before this method anyway.
 		if(this.zoomFactor == 0)
 		{
 			this.zoomFactor = 1.0f;
 		}
 		
-		this.verticalScrollView = new VerticalScroll(getContext());
-		this.horizontalScrollView = new HorizontalScroll(getContext());
+		this.verticalScrollView = new VerticalScroll(context);
+		this.horizontalScrollView = new HorizontalScroll(context);
 		
 		this.verticalScrollView.addView(this.horizontalScrollView, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 		this.addView(this.verticalScrollView, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 	}
 	
 	/**
-	 * Fügt eine View zu diesem Layout hinzu. Ist bereits eine vorhanden, so
-	 * wird diese gelöscht. Die spezifizierte View muss ZoomableView implementiere, sonst wird nichts getan.
+	 * Sets the child view of this layout. Only if that view is an instance of {@link ZoomableView}.
+	 *  This method is not used by the app, but attempts to prevents misuse by the Android framework.
+	 *
+	 * @param view the View which should be the next child view, must implement {@link ZoomableView}
 	 */
 	@Override
-	public void addView(View v)
+	public void addView(View view)
 	{
-		if(v instanceof ZoomableView)
+		if(view instanceof ZoomableView)
 		{
+			// The horizontal scroll view is the lowest view in this FullScrollLayout containing the child view.
 			this.horizontalScrollView.removeAllViews();
-			this.childView = (ZoomableView) v;
-			this.horizontalScrollView.addView(v, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+			this.childView = (ZoomableView) view;
+			this.horizontalScrollView.addView(view, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 		}
 	}
 	
 	/**
-	 * Verarbeitet TouchEvents mit einem Finger, also klicken und scrollen.
+	 * The touch event cannot just be handed down to the child view.
+	 * Before it has to be checked, if the child view would be scrolled,
+	 *  or if multiple touch pointers are attempting to pinch.
 	 *
-	 * @param event Das MotionEvent
+	 * @param event the {@link MotionEvent} containing the touch information
+	 * @return true if this view will intercept this event, then it will not be forwarded to the child view
+	 */
+	@Override
+	public boolean onInterceptTouchEvent(MotionEvent event)
+	{
+		//No need to call the super method, since we disabled visible scrollbars.
+		
+		//Make sure to call both scroll view intercept calls, to initialize/update their internal state.
+		boolean intercept = verticalScrollView.checkIfInterceptsTouch(event);
+		intercept |= horizontalScrollView.checkIfInterceptsTouch(event);
+		return intercept || event.getPointerCount() > 1;
+	}
+	
+	/**
+	 * Processes the touch event on this view.
+	 *  Called, if we intercepted this touch event. Or if no child was directly touched.
+	 * This forwards to the gesture listener if there are more than one pointers.
+	 * And else to the scroll views (both).
+	 *
+	 * @param event the {@link MotionEvent} containing the touch information
 	 */
 	@Override
 	public boolean onTouchEvent(MotionEvent event)
 	{
-		if(event.getPointerCount() == 1) //just one finger -> scroll
+		//Multiple pointers? Assume it is a pinch gesture.
+		if(event.getPointerCount() > 1)
 		{
-			this.horizontalScrollView.performTouch(event);
-			this.verticalScrollView.performTouch(event);
+			scaleGestureDetector.onTouchEvent(event);
+			return true;
 		}
-		else if(this.childView != null) //2 or more fingers
+		//If only one pointer, make sure, that a child view was set to prevent issues.
+		//TODO: Is this if-check even required? How do scroll views act without a child component? -> Prevents wrong initialization.
+		else if(this.childView != null)
 		{
-			this.scaleGestureDetector.onTouchEvent(event);
+			//try
+			//{
+			
+			//It is important that both scroll views receive all possible movement events.
+			// Else only one triggers and consumes the whole event-chain.
+			// Causing only vertical or horizontally to work. But not both (diagonally).
+			verticalScrollView.triggerTouchEvent(event);
+			horizontalScrollView.triggerTouchEvent(event);
+			
+			//}
+			//catch(Exception e)
+			//{
+			//	//TODO: Is this still the case? Does it happen after Android 5+, which exception? Why no details? Can we solve it by copying the motion event?
+			//
+			//	// Old android versions sometimes throw an exception when
+			//	// putting and Event of one view in the onTouch of
+			//	// another view. We just catch that and do nothing
+			//}
+			return true;
 		}
-		return true;
+		return false;
 	}
 	
+	/**
+	 * Has to be overwritten, to let this class behave a bit more like a normal ScrollView,
+	 *  any scroll command is forwarded to the two internal scroll views.
+	 * Applies the raw scroll values. If the target should be centered half the width and height have to be subtracted.
+	 *
+	 * @param x the x position to scroll to
+	 * @param y the y position to scroll to
+	 */
 	@Override
 	public void scrollTo(int x, int y)
 	{
-		// Has to be changed because the tree algo uses different coords.
-		current.x = x - getWidth() / 2;
-		current.y = y - getHeight() / 2; //so apparently "tree algo" needs this... it is parameter are passed with inverse transformation in onscale, to even it out
-		
-		this.verticalScrollView.post(new Runnable()
-		{
-			public void run()
-			{
-				verticalScrollView.scrollTo((int) current.x, (int) current.y);
-				current.y = verticalScrollView.getScrollY();
-			}
+		this.verticalScrollView.post(() -> {
+			verticalScrollView.scrollTo(x, y);
 		});
-		this.horizontalScrollView.post(new Runnable()
-		{
-			public void run()
-			{
-				horizontalScrollView.scrollTo((int) current.x, (int) current.y);
-				current.x = horizontalScrollView.getScrollX();
-			}
+		this.horizontalScrollView.post(() -> {
+			horizontalScrollView.scrollTo(x, y);
 		});
 	}
 	
 	/**
-	 * Setzt den Zoom zurück.
+	 * Scrolls this view, to center provided x and y positions.
+	 *  It cannot always center them (due to the border), but it tries to get them as close as possible to the center.
+	 *
+	 * @param x the x position to scroll to
+	 * @param y the y position to scroll to
+	 */
+	public void centerTo(int x, int y)
+	{
+		//Subtract half the width and height, to move the scroll target to the center.
+		scrollTo(x - getWidth() / 2, y - getHeight() / 2);
+	}
+	
+	/**
+	 * Resets the zoom.
 	 */
 	public void resetZoom()
 	{
@@ -173,9 +226,9 @@ public class FullScrollLayout extends LinearLayout
 	}
 	
 	/**
-	 * Gibt den aktuellen Zoom-Faktor dieses Layouts zurück.
+	 * Returns the current zoom-factor of this layout.
 	 *
-	 * @return Der aktuelle Zoom-Faktor
+	 * @return the current zoom factor
 	 */
 	public float getZoomFactor()
 	{
@@ -183,46 +236,52 @@ public class FullScrollLayout extends LinearLayout
 	}
 	
 	/**
-	 * Setzt den aktuellen Zoom-Faktor des Layouts.
+	 * Sets the current zoom-factor of this layout.
 	 *
-	 * @param newZoom Der neue Zoomfaktor
+	 * @param zoomFactor the new zoom-factor
 	 */
-	public void setZoomFactor(float newZoom)
+	public void setZoomFactor(float zoomFactor)
 	{
-		this.zoomFactor = newZoom;
+		this.zoomFactor = zoomFactor;
 	}
 	
 	/**
-	 * Gibt den aktuell gescrollten X-Wert zurück.
+	 * Returns the currently scrolled x amount
 	 *
-	 * @return der aktuell gescrollte X-Wert
+	 * @return the currently scrolled x amount
 	 */
 	public float getScrollValueX()
 	{
-		return this.current.x;
+		return this.horizontalScrollView.getScrollX();
 	}
 	
 	/**
-	 * Gibt den aktuell gescrollten Y-Wert zurück.
+	 * Returns the currently scrolled y amount
 	 *
-	 * @return der aktuell gescrollte Y-Wert
+	 * @return the currently scrolled y amount
 	 */
 	public float getScrollValueY()
 	{
-		return this.current.y;
+		return this.verticalScrollView.getScrollY();
 	}
 	
+	//It is a little bit unfortunate, that the scroll views do not have the same parent.
+	// Thus there are two times the same classes below. Keep them the same.
+	
 	/**
-	 * Diese Klasse überschreibt das onTouch-Event der ScrollView, sodass dieses
-	 * an dieses FullScrollLayout weitergereicht wird. Durch die
-	 * performTouch-Methode kann das Event zurückgereicht werden.
+	 * The scroll views that are used here should not listen to the normal touch events.
+	 *  That is why 'onInterceptTouch' and 'onTouch' are overridden to have no function.
+	 * Instead two methods have been added to be able to bypass this override and still call the two super methods.
+	 * These should be called by the FullScrollLayout to manually distribute the touch events.
+	 *
+	 * Scrollbar visibility will be disabled.
 	 */
-	private class VerticalScroll extends ScrollView
+	private static class VerticalScroll extends ScrollView
 	{
 		/**
-		 * Instanziiert eine neue vertikale ScrollView.
+		 * Initializes this scroll view and disables visibility of scroll bars.
 		 *
-		 * @param context Der Kontext
+		 * @param context the context which is in charge of the FullScrollLayout
 		 */
 		public VerticalScroll(Context context)
 		{
@@ -231,6 +290,18 @@ public class FullScrollLayout extends LinearLayout
 			setHorizontalScrollBarEnabled(false);
 		}
 		
+		/**
+		 * Overridden to disable the functionality by natural framework calls.
+		 */
+		@Override
+		public boolean onInterceptTouchEvent(MotionEvent event)
+		{
+			return false;
+		}
+		
+		/**
+		 * Overridden to disable the functionality by natural framework calls.
+		 */
 		@Override
 		public boolean onTouchEvent(MotionEvent event)
 		{
@@ -238,39 +309,43 @@ public class FullScrollLayout extends LinearLayout
 		}
 		
 		/**
-		 * Für das übergebene Touch-Event aus.
+		 * Should be called to check if this scroll view intends to accept the provided {@link MotionEvent}.
+		 * In case of true, the onTouchEvent should be called manually.
 		 *
-		 * @param event Das auszuführende Touch-Event
+		 * @param event the {@link MotionEvent} to check
+		 * @return true, if event should be processed, else false
 		 */
-		public void performTouch(MotionEvent event)
+		public boolean checkIfInterceptsTouch(MotionEvent event)
 		{
-			try
-			{
-				event.getX();
-				event.getY();
-				super.onTouchEvent(event);
-				current.y = this.getScrollY();
-			}
-			catch(Exception e)
-			{
-				// Old android versions sometimes throw an exception when
-				// putting and Event of one view in the onTouch of
-				// another view. We just catch that and do nothing
-			}
+			return super.onInterceptTouchEvent(event);
+		}
+		
+		/**
+		 * Should be called to let the {@link MotionEvent} be processed by this scroll view.
+		 *  If the onInterceptTouchEvent returned true.
+		 *
+		 * @param event the {@link MotionEvent} to process
+		 */
+		public void triggerTouchEvent(MotionEvent event)
+		{
+			super.onTouchEvent(event);
 		}
 	}
 	
 	/**
-	 * Diese Klasse überschreibt das onTouch-Event der HorizontalScrollView,
-	 * sodass dieses an dieses FullScrollLayout weitergereicht wird. Durch die
-	 * performTouch-Methode kann das Event zurückgereicht werden.
+	 * The scroll views that are used here should not listen to the normal touch events.
+	 *  That is why 'onInterceptTouch' and 'onTouch' are overridden to have no function.
+	 * Instead two methods have been added to be able to bypass this override and still call the two super methods.
+	 * These should be called by the FullScrollLayout to manually distribute the touch events.
+	 *
+	 * Scrollbar visibility will be disabled.
 	 */
-	private class HorizontalScroll extends HorizontalScrollView
+	private static class HorizontalScroll extends HorizontalScrollView
 	{
 		/**
-		 * Instanziiert eine neue horizontale ScrollView.
+		 * Initializes this scroll view and disables visibility of scroll bars.
 		 *
-		 * @param context Der Kontext
+		 * @param context the context which is in charge of the FullScrollLayout
 		 */
 		public HorizontalScroll(Context context)
 		{
@@ -279,6 +354,18 @@ public class FullScrollLayout extends LinearLayout
 			setHorizontalScrollBarEnabled(false);
 		}
 		
+		/**
+		 * Overridden to disable the functionality by natural framework calls.
+		 */
+		@Override
+		public boolean onInterceptTouchEvent(MotionEvent event)
+		{
+			return false;
+		}
+		
+		/**
+		 * Overridden to disable the functionality by natural framework calls.
+		 */
 		@Override
 		public boolean onTouchEvent(MotionEvent event)
 		{
@@ -286,31 +373,32 @@ public class FullScrollLayout extends LinearLayout
 		}
 		
 		/**
-		 * Für das übergebene Touch-Event aus.
+		 * Should be called to check if this scroll view intends to accept the provided {@link MotionEvent}.
+		 * In case of true, the onTouchEvent should be called manually.
 		 *
-		 * @param event Das auszuführende Touch-Event
+		 * @param event the {@link MotionEvent} to check
+		 * @return true, if event should be processed, else false
 		 */
-		public void performTouch(MotionEvent event)
+		public boolean checkIfInterceptsTouch(MotionEvent event)
 		{
-			try
-			{
-				event.getX();
-				event.getY();
-				super.onTouchEvent(event);
-				current.x = this.getScrollX();
-			}
-			catch(Exception e)
-			{
-				// Old android versions sometimes throw an exception when
-				// putting and Event of one view in the onTouch of
-				// another view. We just catch that and do nothing
-			}
+			return super.onInterceptTouchEvent(event);
+		}
+		
+		/**
+		 * Should be called to let the {@link MotionEvent} be processed by this scroll view.
+		 *  If the onInterceptTouchEvent returned true.
+		 *
+		 * @param event the {@link MotionEvent} to process
+		 */
+		public void triggerTouchEvent(MotionEvent event)
+		{
+			super.onTouchEvent(event);
 		}
 	}
 	
 	private class ScaleGestureListener extends ScaleGestureDetector.SimpleOnScaleGestureListener
 	{
-		Point focus;
+		private Point focus;
 		
 		@Override
 		public boolean onScale(ScaleGestureDetector detector)
@@ -346,53 +434,32 @@ public class FullScrollLayout extends LinearLayout
 			 * we want that distance to be kept so we subtract it from the scaled value for fp namely fp* zoom.
 			 * hence lt = focus * zoom - focus
 			 */
-			current.x = focus.x * zoomFactor - focus.x;
-			current.y = focus.y * zoomFactor - focus.y;
-			/* even out the transformation on scrollTo */
-			transform(current);
-			scrollTo2(current);
-			Log.d(LOG_TAG, "Scaled to: " + current.toString() + "    "
-					+ "Focus: " + focus.toString() + "   "
-					+ "zoom: " + zoomFactor);
+			float x = focus.x * zoomFactor - focus.x;
+			float y = focus.y * zoomFactor - focus.y;
+			scrollTo((int) x, (int) y);
+			
+			Log.d(LOG_TAG, "onScale() To: " + x + ", " + y + " Focus: " + focus + " Zoom: " + zoomFactor);
 			return true;
 		}
 		
 		@Override
 		public boolean onScaleBegin(ScaleGestureDetector scaleGestureDetector)
 		{
-			Log.d(LOG_TAG, "On scale begin-------------------------(");
-			focus = new Point(scaleGestureDetector.getFocusX()
-					, scaleGestureDetector.getFocusY());
-			((SudokuLayout) childView).focusX = focus.x;//only for debug
-			((SudokuLayout) childView).focusY = focus.y;
+			Log.d(LOG_TAG, "onScaleBegin()");
+			focus = new Point(scaleGestureDetector.getFocusX(), scaleGestureDetector.getFocusY());
 			return true;
 		}
 		
 		@Override
 		public void onScaleEnd(ScaleGestureDetector scaleGestureDetector)
 		{
-			Log.d(LOG_TAG, "On scale end----------------)");
-		}
-		
-		/* transform to even out inverse transformation in scrollTo(x,y). A trafo exists there because of "tree algo" */
-		private void transform(Point p)
-		{
-			p.x += getWidth() / 2;
-			p.y += getHeight() / 2;
-		}
-		
-		private void scrollTo2(Point p)
-		{
-			/* save for log */
-			current.x = p.x;
-			current.y = p.y;
-			scrollTo((int) p.x, (int) p.y);
+			Log.d(LOG_TAG, "onScaleEnd()");
 		}
 	}
 	
-	private class Point
+	private static class Point
 	{
-		float x, y;
+		private final float x, y;
 		
 		public Point(float x, float y)
 		{
@@ -400,6 +467,7 @@ public class FullScrollLayout extends LinearLayout
 			this.y = y;
 		}
 		
+		@NonNull
 		public String toString()
 		{
 			return (int) x + "," + (int) y;

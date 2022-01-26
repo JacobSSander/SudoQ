@@ -82,7 +82,8 @@ public abstract class ActionTreeElementView extends View
 	@Override
 	public boolean onTouchEvent(MotionEvent motionEvent)
 	{
-		if(motionEvent.getAction() == MotionEvent.ACTION_DOWN)
+		//TBI: Maybe switch to onClick()
+		if(motionEvent.getAction() == MotionEvent.ACTION_UP)
 		{
 			for(ActionTreeNavListener listener : this.actionTreeNavListener)
 			{
