@@ -40,7 +40,7 @@ import de.sudoq.controller.sudoku.InputListener;
 import de.sudoq.controller.sudoku.Symbol;
 import de.sudoq.model.files.FileManager;
 import de.sudoq.model.profile.Profile;
-import de.sudoq.view.VirtualKeyboardLayout;
+import de.sudoq.view.controlpanel.VirtualKeyboardLayout;
 
 /**
  * Der GestureBuilder gestattet es dem Benutzer selber Gesten für die Benutzung im Spiel zu definieren, das ermöglicht eine wesentlich höhere Erkennungsrate als mitgelieferte Gesten.

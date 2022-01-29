@@ -7,7 +7,7 @@
  */
 package de.sudoq.controller.sudoku;
 
-import de.sudoq.view.SudokuCellView;
+import de.sudoq.view.sudoku.SudokuCellView;
 
 /**
  * A listener for changes in sudoku cells, like selection of a cell or change in its value.

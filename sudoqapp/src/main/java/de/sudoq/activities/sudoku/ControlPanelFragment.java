@@ -19,7 +19,7 @@ import de.sudoq.controller.sudoku.SudokuController;
 import de.sudoq.controller.sudoku.UserInteractionMediator;
 import de.sudoq.model.game.Game;
 import de.sudoq.model.profile.Profile;
-import de.sudoq.view.SudokuLayout;
+import de.sudoq.view.sudoku.SudokuLayout;
 
 public class ControlPanelFragment extends Fragment
 {

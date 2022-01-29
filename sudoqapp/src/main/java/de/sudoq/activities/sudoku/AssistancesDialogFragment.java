@@ -21,8 +21,8 @@ import de.sudoq.model.game.Game;
 import de.sudoq.model.profile.Profile;
 import de.sudoq.model.solverGenerator.solution.SolveDerivation;
 import de.sudoq.model.solvingAssistant.SolvingAssistant;
-import de.sudoq.view.SudokuCellView;
-import de.sudoq.view.SudokuLayout;
+import de.sudoq.view.sudoku.SudokuCellView;
+import de.sudoq.view.sudoku.SudokuLayout;
 
 public class AssistancesDialogFragment extends DialogFragment
 {

@@ -1,4 +1,4 @@
-package de.sudoq.view;
+package de.sudoq.view.controlpanel;
 
 import android.content.Context;
 import android.util.AttributeSet;

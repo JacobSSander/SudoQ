@@ -9,7 +9,7 @@
     android:orientation="vertical"
     android:id="@+id/gesture_builder_layout" >
 
-    <de.sudoq.view.VirtualKeyboardLayout
+    <de.sudoq.view.controlpanel.VirtualKeyboardLayout
 
        	android:id="@+id/gesture_builder_virtual_keyboard"
        	android:layout_width="wrap_content"
@@ -18,6 +18,6 @@
        	android:gravity="center"
        	android:orientation="vertical"
        	android:padding="8dp" >
-    </de.sudoq.view.VirtualKeyboardLayout>
+    </de.sudoq.view.controlpanel.VirtualKeyboardLayout>
 
 </FrameLayout>

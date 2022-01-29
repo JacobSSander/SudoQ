@@ -5,44 +5,37 @@
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  * You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
-package de.sudoq.view.Hints;
+package de.sudoq.view.hints;
 
 import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
 
-import de.sudoq.model.solverGenerator.solution.LockedCandidatesDerivation;
-import de.sudoq.model.solverGenerator.solution.XWingDerivation;
-import de.sudoq.model.sudoku.Constraint;
-import de.sudoq.view.SudokuLayout;
+import java.util.List;
+
+import de.sudoq.model.solverGenerator.solution.DerivationBlock;
+import de.sudoq.model.solverGenerator.solution.SolveDerivation;
+import de.sudoq.view.sudoku.SudokuLayout;
 
 /**
  * Diese Subklasse des von der Android API bereitgestellten Views stellt ein
  * einzelnes Feld innerhalb eines Sudokus dar. Es erweitert den Android View um
  * Funktionalität zur Benutzerinteraktion und Färben.
  */
-public class XWingView extends HintView
+public class LastDigitView extends HintView
 {
 	/**
-	 * Erstellt einen SudokuFieldView und initialisiert die Attribute der Klasse.
+	 * Erstellt einen LastDigitView
 	 *
 	 * @param context der Applikationskontext
 	 * @throws IllegalArgumentException Wird geworfen, falls eines der Argumente null ist
 	 */
-	public XWingView(Context context, SudokuLayout sl, XWingDerivation d)
+	public LastDigitView(Context context, SudokuLayout sl, SolveDerivation d)
 	{
 		super(context, sl, d);
 		
-		for(Constraint c : d.getReducibleConstraints()) //'note' appears not only in intersection
-		{
-			View reducibleConstraintV = new HighlightedConstraintView(context, sl, c, Color.GREEN);
-			highlightedObjects.add(reducibleConstraintV);
-		}
-		
-		for(Constraint c : d.getLockedConstraints()) //'note' appears only in intersection. this is painted after the blue ones so people don't mistakenly remove notes of the intersection cause the cell is green
-		{
-			View lockedConstraintV = new HighlightedConstraintView(context, sl, c, Color.BLUE);
-			highlightedObjects.add(lockedConstraintV);
-		}
+		List<DerivationBlock> db = d.getDerivationBlocks();
+		View constraintV = new HighlightedConstraintView(context, sl, db.get(0).getBlock(), Color.BLUE);
+		highlightedObjects.add(constraintV);
 	}
 }

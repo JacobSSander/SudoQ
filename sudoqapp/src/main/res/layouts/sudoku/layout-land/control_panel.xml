@@ -20,7 +20,7 @@ android:background="#282828" >
         android:layout_height="wrap_content"
         android:paddingLeft="5dp">
 
-        <de.sudoq.view.SquareImageButton
+        <de.sudoq.view.controlpanel.SquareImageButton
             android:id="@+id/button_sudoku_help"
             android:padding="7dp"
             android:scaleType="fitXY"
@@ -31,7 +31,7 @@ android:background="#282828" >
             android:onClick="onClick"
             android:src="@drawable/help" />
 
-        <de.sudoq.view.SquareImageButton
+        <de.sudoq.view.controlpanel.SquareImageButton
             android:id="@+id/button_sudoku_actionTree"
             android:padding="7dp"
             android:scaleType="fitXY"
@@ -51,7 +51,7 @@ android:background="#282828" >
         android:layout_height="wrap_content"
         android:paddingLeft="5dp">
 
-        <de.sudoq.view.SquareImageButton
+        <de.sudoq.view.controlpanel.SquareImageButton
             android:id="@+id/button_sudoku_undo"
             android:padding="7dp"
             android:scaleType="fitXY"
@@ -62,7 +62,7 @@ android:background="#282828" >
             android:onClick="onClick"
             android:src="@drawable/undo" />
 
-        <de.sudoq.view.SquareImageButton
+        <de.sudoq.view.controlpanel.SquareImageButton
             android:id="@+id/button_sudoku_redo"
             android:padding="7dp"
             android:scaleType="fitXY"
@@ -73,7 +73,7 @@ android:background="#282828" >
             android:onClick="onClick"
             android:src="@drawable/redo" />
 
-        <de.sudoq.view.SquareImageButton
+        <de.sudoq.view.controlpanel.SquareImageButton
             android:id="@+id/button_sudoku_toggle_gesture"
             android:padding="7dp"
             android:scaleType="fitXY"

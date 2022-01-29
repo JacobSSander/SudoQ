@@ -31,9 +31,9 @@ import de.sudoq.model.sudoku.Cell;
 import de.sudoq.model.sudoku.Sudoku;
 import de.sudoq.model.sudoku.sudokuTypes.SudokuType;
 import de.sudoq.view.GestureInputOverlay;
-import de.sudoq.view.SudokuCellView;
-import de.sudoq.view.SudokuLayout;
-import de.sudoq.view.VirtualKeyboardLayout;
+import de.sudoq.view.sudoku.SudokuCellView;
+import de.sudoq.view.sudoku.SudokuLayout;
+import de.sudoq.view.controlpanel.VirtualKeyboardLayout;
 
 /**
  * Ein Vermittler zwischen einem Sudoku und den verschiedenen

@@ -16,7 +16,7 @@ import android.view.View;
 
 import java.util.Hashtable;
 
-import de.sudoq.view.SudokuLayout;
+import de.sudoq.view.sudoku.SudokuLayout;
 
 /**
  * This class is responsible for Animationens and highlighting of cells.
@@ -196,7 +196,7 @@ public class CellViewPainter
 				This happens when 'gesture' is clicked in profile without playing a game first. sl is then null
 				java.lang.NullPointerException:
 				at de.sudoq.controller.sudoku.board.FieldViewPainter.markField (FieldViewPainter.java:182)
-				at de.sudoq.view.VirtualKeyboardButtonView.onDraw (VirtualKeyboardButtonView.java:104)
+				at de.sudoq.view.controlpanel.VirtualKeyboardButtonView.onDraw (VirtualKeyboardButtonView.java:104)
 				at android.view.View.draw (View.java:17469)
 				at android.view.View.updateDisplayListIfDirty (View.java:16464)
 				at android.view.View.draw (View.java:17238)

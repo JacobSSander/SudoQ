@@ -5,7 +5,7 @@
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  * You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
-package de.sudoq.view.Hints;
+package de.sudoq.view.hints;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -18,7 +18,7 @@ import de.sudoq.controller.sudoku.Symbol;
 import de.sudoq.model.sudoku.Constraint;
 import de.sudoq.model.sudoku.Cell;
 import de.sudoq.model.sudoku.Position;
-import de.sudoq.view.SudokuLayout;
+import de.sudoq.view.sudoku.SudokuLayout;
 
 /**
  * Diese Subklasse des von der Android API bereitgestellten Views stellt ein

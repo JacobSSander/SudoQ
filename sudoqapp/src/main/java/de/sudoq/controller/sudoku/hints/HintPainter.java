@@ -19,15 +19,15 @@ import de.sudoq.model.solverGenerator.solution.NakedSetDerivation;
 import de.sudoq.model.solverGenerator.solution.NoNotesDerivation;
 import de.sudoq.model.solverGenerator.solution.SolveDerivation;
 import de.sudoq.model.solverGenerator.solution.XWingDerivation;
-import de.sudoq.view.Hints.HiddenSetView;
-import de.sudoq.view.Hints.LastCandidateView;
-import de.sudoq.view.Hints.LastDigitView;
-import de.sudoq.view.Hints.LeftoverNoteView;
-import de.sudoq.view.Hints.LockedCandidatesView;
-import de.sudoq.view.Hints.NakedSetView;
-import de.sudoq.view.Hints.NoNotesView;
-import de.sudoq.view.Hints.XWingView;
-import de.sudoq.view.SudokuLayout;
+import de.sudoq.view.hints.HiddenSetView;
+import de.sudoq.view.hints.LastCandidateView;
+import de.sudoq.view.hints.LastDigitView;
+import de.sudoq.view.hints.LeftoverNoteView;
+import de.sudoq.view.hints.LockedCandidatesView;
+import de.sudoq.view.hints.NakedSetView;
+import de.sudoq.view.hints.NoNotesView;
+import de.sudoq.view.hints.XWingView;
+import de.sudoq.view.sudoku.SudokuLayout;
 
 /**
  * Manages all hintrelated views

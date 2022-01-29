@@ -23,13 +23,13 @@ android:visibility="visible">
 
 </LinearLayout>
 
-<de.sudoq.view.VirtualKeyboardLayout
+<de.sudoq.view.controlpanel.VirtualKeyboardLayout
     android:id="@+id/virtual_keyboard"
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="5dp" >
-</de.sudoq.view.VirtualKeyboardLayout>
+</de.sudoq.view.controlpanel.VirtualKeyboardLayout>
 
 </LinearLayout>

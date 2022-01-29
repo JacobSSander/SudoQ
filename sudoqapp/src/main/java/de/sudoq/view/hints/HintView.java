@@ -1,4 +1,4 @@
-package de.sudoq.view.Hints;
+package de.sudoq.view.hints;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Stack;
 
 import de.sudoq.model.solverGenerator.solution.SolveDerivation;
-import de.sudoq.view.SudokuLayout;
+import de.sudoq.view.sudoku.SudokuLayout;
 
 public class HintView extends View
 {

@@ -63,9 +63,9 @@ import de.sudoq.model.sudoku.Cell;
 import de.sudoq.model.sudoku.Position;
 import de.sudoq.view.FullScrollLayout;
 import de.sudoq.view.GestureInputOverlay;
-import de.sudoq.view.SudokuCellView;
-import de.sudoq.view.SudokuLayout;
-import de.sudoq.view.VirtualKeyboardLayout;
+import de.sudoq.view.sudoku.SudokuCellView;
+import de.sudoq.view.sudoku.SudokuLayout;
+import de.sudoq.view.controlpanel.VirtualKeyboardLayout;
 
 /**
  * Diese Klasse stellt die Activity des Sudokuspiels dar. Die Klasse hält das

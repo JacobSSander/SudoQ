@@ -5,7 +5,7 @@
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  * You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
-package de.sudoq.view;
+package de.sudoq.view.sudoku;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -31,6 +31,7 @@ import de.sudoq.model.sudoku.ConstraintType;
 import de.sudoq.model.sudoku.Position;
 import de.sudoq.model.sudoku.Sudoku;
 import de.sudoq.model.sudoku.sudokuTypes.SudokuType;
+import de.sudoq.view.ZoomableView;
 
 /**
  * Eine View als RealativeLayout, die eine Sudoku-Anzeige verwaltet.

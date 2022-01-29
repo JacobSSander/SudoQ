@@ -7,7 +7,7 @@ import de.sudoq.model.sudoku.Constraint;
 import de.sudoq.model.sudoku.ConstraintType;
 import de.sudoq.model.sudoku.Position;
 import de.sudoq.model.sudoku.sudokuTypes.SudokuType;
-import de.sudoq.view.SudokuLayout;
+import de.sudoq.view.sudoku.SudokuLayout;
 
 public class BoardPainter
 {
