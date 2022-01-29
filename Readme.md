@@ -61,10 +61,23 @@ I decided to remove the tests. While this is in general a bad decision.\
 It is less code to refactor for me. Since I do plan a bit of refactoring.\
 The tests can be re-added later on, depending on which decisions have been made.
 
-#### Done:
+#### Old issues/bugs:
 
-- The language support has been fully refactored, now it should no longer have any issues.
-- This fork is pretty much up to date with the parent project. Except some refactorings by the maintainer.
+These things had been an issue, and I do plan to fix some of them.\
+But due to the differences in goals and maintenance I will no longer apply them to the parent fork.
+
+- Action-Tree: Connection-Lines are on top of parent nodes.
+- Zooming: The repositioning after the zooming is not smooth.
+- Zooming: When zooming one cannot move the content at the same time.
+- Gestures: 4 Cannot be drawn with two lines.
+- Difficulty: When starting a 'Difficult' type Sudoku, it often appears as 'Infernal'.
+
+#### Fixed/Done:
+
+The things which I did on this fork from the list of my issues or features:
+
+- Language: The old language system was quite complex. It had issues where it was not applied, or failed when the screen rotated (crash). Also several issues with handling unknown languages.\
+  This has been fixed in a way that now every activity checks for the language it should be in, vs the language it was loaded in, whenever it gets created/started/resumed.
 
 #### Planned:
 
