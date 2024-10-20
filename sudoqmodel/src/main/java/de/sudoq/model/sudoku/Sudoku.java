@@ -41,6 +41,12 @@ public class Sudoku extends ObservableModelImpl<Cell> implements Iterable<Cell>,
 	
 	private int cellIdCounter;
 	private Map<Integer, Position> cellPositions;
+
+	/**
+	 * A map containing the symbols and number of occurrences
+	 */
+
+	private Map<Integer,Integer> symbolOccurence;
 	
 	/**
 	 * Der Typ dieses Sudokus
@@ -97,6 +103,8 @@ public class Sudoku extends ObservableModelImpl<Cell> implements Iterable<Cell>,
 		this.type = type;
 		this.cells = new HashMap<>();
 		this.complexity = null;
+
+		this.symbolOccurence = new HashMap<>(type.getNumberOfSymbols());
 		
 		// iterate over the constraints of the type and create the fields
 		for(Constraint constraint : type)
@@ -124,6 +132,15 @@ public class Sudoku extends ObservableModelImpl<Cell> implements Iterable<Cell>,
 					f.registerListener(this);
 				}
 			}
+		}
+
+		//preload map with zeros
+		for (int symbol: type.getSymbolIterator()) {
+			symbolOccurence.put(symbol, 0);
+		}
+
+		for (Cell cell:cells.values()) {
+
 		}
 	}
 	
@@ -414,6 +431,15 @@ public class Sudoku extends ObservableModelImpl<Cell> implements Iterable<Cell>,
 		}
 		return false;
 		//return this.fields.values().stream().anyMatch(f -> !f.isNotWrong()); //looks weird but be very careful with simplifications!
+	}
+
+	/**
+	 * Increments the occurrence counter for the given symbol by one
+	 *
+	 * @param symbol The symbol for which the counter should be incremented
+	 */
+	public void addSymbolOccurrence(int symbol){
+		symbolOccurence.computeIfPresent(symbol, (key,val) -> val + 1);
 	}
 	
 	//debug
