@@ -97,6 +97,7 @@ public class SudokuController implements AssistanceRequestListener, ActionListen
 	@Override
 	public void onAddEntry(Cell cell, int value)
 	{
+		game.getSudoku().incrementSymbolOccurrence(value);
 		game.addAndExecute(new SolveActionFactory().createAction(value, cell));
 		if(this.game.isFinished())
 		{
@@ -118,6 +119,7 @@ public class SudokuController implements AssistanceRequestListener, ActionListen
 	@Override
 	public void onDeleteEntry(Cell cell)
 	{
+		game.getSudoku().incrementSymbolOccurrence(cell.getCurrentValue());
 		game.addAndExecute(new SolveActionFactory().createAction(Cell.EMPTYVAL, cell));
 	}
 	
