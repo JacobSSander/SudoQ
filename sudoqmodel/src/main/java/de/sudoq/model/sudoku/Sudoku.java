@@ -140,7 +140,9 @@ public class Sudoku extends ObservableModelImpl<Cell> implements Iterable<Cell>,
 		}
 
 		for (Cell cell:cells.values()) {
-
+			if(cell.isSolved()){
+				incrementSymbolOccurrence(cell.getCurrentValue());
+			}
 		}
 	}
 	
@@ -438,8 +440,29 @@ public class Sudoku extends ObservableModelImpl<Cell> implements Iterable<Cell>,
 	 *
 	 * @param symbol The symbol for which the counter should be incremented
 	 */
-	public void addSymbolOccurrence(int symbol){
-		symbolOccurence.computeIfPresent(symbol, (key,val) -> val + 1);
+	public void incrementSymbolOccurrence(int symbol){
+		if(symbolOccurence.containsKey(symbol)){
+			int count = symbolOccurence.get(symbol);
+			count = count < type.getNumberOfSymbols() ? count + 1 : type.getNumberOfSymbols();
+			symbolOccurence.put(symbol, count);
+		}
+	}
+
+	/**
+	 * Decrements the occurrence counter for the given symbol by one
+	 *
+	 * @param symbol The symbol for which the counter should be decremented
+	 */
+	public void decrementSymbolOccurrence(int symbol){
+		if(symbolOccurence.containsKey(symbol)){
+			int count = symbolOccurence.get(symbol);
+			count = count > 0 ? count - 1 : 0;
+			symbolOccurence.put(symbol, count);
+		}
+	}
+
+	public Map<Integer,Integer> getSymbolOccurrence(){
+		return new HashMap<>(symbolOccurence);
 	}
 	
 	//debug

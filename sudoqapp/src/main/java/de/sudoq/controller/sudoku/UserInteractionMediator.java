@@ -19,6 +19,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import de.sudoq.R;
@@ -500,7 +501,7 @@ public class UserInteractionMediator implements OnGesturePerformedListener, Inpu
 		/* only if assistance 'mark solved symbols' is enabled */
 		if(true)
 		{
-			Set<Integer> allSolved = getSolvedSymbolSet(this.game.getSudoku(), currentCell, noteMode);
+			Set<Integer> allSolved = getSolvedSymbolSet(this.game.getSudoku());
 			for(int i : type.getSymbolIterator())
 			{
 				if(allSolved.contains(i))
@@ -585,68 +586,19 @@ public class UserInteractionMediator implements OnGesturePerformedListener, Inpu
 	 * grey out symbols that appear the need number of times.
 	 * caution
 	 */
-	private synchronized Set<Integer> getSolvedSymbolSet(Sudoku s, Cell currentCell, boolean noteMode)
+	private synchronized Set<Integer> getSolvedSymbolSet(Sudoku s)
 	{
 		Set<Integer> solvedSet = new HashSet<>();
 		SudokuType type = s.getSudokuType();
-		List<Constraint> relevantConstraints = new ArrayList<>();
-		for(Constraint c : type)
-		{
-			if(c.getPositions().contains(s.getPosition(currentCell.getId())))
-			{
-				relevantConstraints.add(c);
+
+		Map<Integer,Integer> symbolOccurence = s.getSymbolOccurrence();
+
+		for (int symbol: type.getSymbolIterator()) {
+			if(symbolOccurence.get(symbol) == type.getNumberOfSymbols()){
+				solvedSet.add(symbol);
 			}
 		}
 
-		/* save val of current view */
-		int save = currentCell.getCurrentValue();
-		int type.getNumberOfSymbols();
-
-		/* iterate over all symbols e.g. 0-8 */
-		for(int i : type.getSymbolIterator())
-		{
-			/* set cellval to current symbol */
-			currentCell.setCurrentValue(i, false);
-
-			boolean possible = true;
-			/* for every constraint */
-			for(Constraint c : relevantConstraints)
-			{
-				/* if constraint not satisfied -> disable */
-				if(!c.isSaturated(s))
-				{
-					possible = false;
-					break;
-				}
-			}
-
-			if(possible)
-			{
-				solvedSet.add(i);
-			}
-			currentCell.setCurrentValue(Cell.EMPTYVAL, false); // unneccessary
-		}
-		currentCell.setCurrentValue(save, false);
-
-		/*
-		 * Github Issue #116
-		 * it would be stupid if we were in the mode where notes are set
-		 * and would disable a now impossible note that had been set by user.
-		 * Because then, it can't be unset by the user
-		 */
-		Set<Integer> setNotes = new HashSet<>();
-		if(noteMode)
-		{
-			for(int i : type.getSymbolIterator())
-			{
-				if(currentCell.isNoteSet(i))
-				{
-					setNotes.add(i);
-				}
-			}
-		}
-
-		solvedSet.addAll(setNotes);
 		return solvedSet;
 	}
 }
