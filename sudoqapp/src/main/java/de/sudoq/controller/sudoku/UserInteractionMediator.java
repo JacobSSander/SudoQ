@@ -501,7 +501,7 @@ public class UserInteractionMediator implements OnGesturePerformedListener, Inpu
 		/* only if assistance 'mark solved symbols' is enabled */
 		if(true)
 		{
-			Set<Integer> allSolved = getSolvedSymbolSet(this.game.getSudoku());
+			Set<Integer> allSolved = getSolvedSymbolSet(this.game);
 			for(int i : type.getSymbolIterator())
 			{
 				if(allSolved.contains(i))
@@ -586,12 +586,12 @@ public class UserInteractionMediator implements OnGesturePerformedListener, Inpu
 	 * grey out symbols that appear the need number of times.
 	 * caution
 	 */
-	private synchronized Set<Integer> getSolvedSymbolSet(Sudoku s)
+	private synchronized Set<Integer> getSolvedSymbolSet(Game g)
 	{
 		Set<Integer> solvedSet = new HashSet<>();
-		SudokuType type = s.getSudokuType();
+		SudokuType type = g.getSudoku().getSudokuType();
 
-		Map<Integer,Integer> symbolOccurence = s.getSymbolOccurrence();
+		Map<Integer,Integer> symbolOccurence = g.getSymbolOccurrence();
 
 		for (int symbol: type.getSymbolIterator()) {
 			if(symbolOccurence.get(symbol) == type.getNumberOfSymbols()){

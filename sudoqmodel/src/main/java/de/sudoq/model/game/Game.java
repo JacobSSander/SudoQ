@@ -9,7 +9,10 @@ package de.sudoq.model.game;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import de.sudoq.model.actionTree.Action;
@@ -67,6 +70,11 @@ public class Game implements Xmlable
 	 * Zeigt an, ob das Sudoku beendet ist
 	 */
 	private boolean finished;
+
+	/**
+	 * A map containing the symbols and number of occurrences
+	 */
+	private Map<Integer,Integer> symbolOccurrence;
 	
 	/* Constructors */
 	
@@ -92,6 +100,19 @@ public class Game implements Xmlable
 		this.sudoku = sudoku;
 		this.time = 0;
 		stateHandler = new GameStateHandler();
+		this.symbolOccurrence = new HashMap<>(sudoku.getSudokuType().getNumberOfSymbols());
+
+		//preload map with zeros
+		for (int symbol: sudoku.getSudokuType().getSymbolIterator()) {
+			symbolOccurrence.put(symbol, 0);
+		}
+
+		for (Iterator<Cell> it = sudoku.iterator(); it.hasNext(); ) {
+			Cell cell = it.next();
+			if(cell.isSolved()){
+				incrementSymbolOccurrence(cell.getCurrentValue());
+			}
+		}
 	}
 	
 	/**
@@ -536,6 +557,37 @@ public class Game implements Xmlable
 	{
 		return this.gameSettings.isLefthandModeSet();
 	}
+
+
+	/**
+	 * Increments the occurrence counter for the given symbol by one
+	 *
+	 * @param symbol The symbol for which the counter should be incremented
+	 */
+	public void incrementSymbolOccurrence(int symbol){
+		if(symbolOccurrence.containsKey(symbol)){
+			int count = symbolOccurrence.get(symbol);
+			count = count < sudoku.getSudokuType().getNumberOfSymbols() ? count + 1 : sudoku.getSudokuType().getNumberOfSymbols();
+			symbolOccurrence.put(symbol, count);
+		}
+	}
+
+	/**
+	 * Decrements the occurrence counter for the given symbol by one
+	 *
+	 * @param symbol The symbol for which the counter should be decremented
+	 */
+	public void decrementSymbolOccurrence(int symbol){
+		if(symbolOccurrence.containsKey(symbol)){
+			int count = symbolOccurrence.get(symbol);
+			count = count > 0 ? count - 1 : 0;
+			symbolOccurrence.put(symbol, count);
+		}
+	}
+
+	public Map<Integer,Integer> getSymbolOccurrence(){
+		return new HashMap<>(symbolOccurrence);
+	}
 	
 	@Override
 	public XmlTree toXmlTree()
@@ -641,6 +693,21 @@ public class Game implements Xmlable
 		}
 		
 		finished = Boolean.parseBoolean(xmlTreeRepresentation.getAttributeValue("finished"));
+
+		this.symbolOccurrence = new HashMap<>(sudoku.getSudokuType().getNumberOfSymbols());
+
+		//preload map with zeros
+		for (int symbol: sudoku.getSudokuType().getSymbolIterator()) {
+			symbolOccurrence.put(symbol, 0);
+		}
+
+		for (Iterator<Cell> it = sudoku.iterator(); it.hasNext(); ) {
+			Cell cell = it.next();
+			if(cell.isSolved()){
+				incrementSymbolOccurrence(cell.getCurrentValue());
+			}
+		}
+
 		goToState(stateHandler.getActionTree().getElement(currentStateId));
 	}
 	

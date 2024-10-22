@@ -41,12 +41,6 @@ public class Sudoku extends ObservableModelImpl<Cell> implements Iterable<Cell>,
 	
 	private int cellIdCounter;
 	private Map<Integer, Position> cellPositions;
-
-	/**
-	 * A map containing the symbols and number of occurrences
-	 */
-
-	private Map<Integer,Integer> symbolOccurrence;
 	
 	/**
 	 * Der Typ dieses Sudokus
@@ -103,8 +97,6 @@ public class Sudoku extends ObservableModelImpl<Cell> implements Iterable<Cell>,
 		this.type = type;
 		this.cells = new HashMap<>();
 		this.complexity = null;
-
-		this.symbolOccurrence = new HashMap<>(type.getNumberOfSymbols());
 		
 		// iterate over the constraints of the type and create the fields
 		for(Constraint constraint : type)
@@ -131,17 +123,6 @@ public class Sudoku extends ObservableModelImpl<Cell> implements Iterable<Cell>,
 					cellPositions.put(cellIdCounter++, position);
 					f.registerListener(this);
 				}
-			}
-		}
-
-		//preload map with zeros
-		for (int symbol: type.getSymbolIterator()) {
-			symbolOccurrence.put(symbol, 0);
-		}
-
-		for (Cell cell:cells.values()) {
-			if(cell.isSolved()){
-				incrementSymbolOccurrence(cell.getCurrentValue());
 			}
 		}
 	}
@@ -333,7 +314,6 @@ public class Sudoku extends ObservableModelImpl<Cell> implements Iterable<Cell>,
 		cellIdCounter = 1;
 		cellPositions = new HashMap<>();
 		cells = new HashMap<>();
-		symbolOccurrence = new HashMap<>();
 		
 		try
 		{
@@ -376,17 +356,6 @@ public class Sudoku extends ObservableModelImpl<Cell> implements Iterable<Cell>,
 				cells.put(pos, cell);
 				cellPositions.put(fieldId, pos);
 				cellIdCounter++;
-			}
-		}
-
-		//preload map with zeros
-		for (int symbol: type.getSymbolIterator()) {
-			symbolOccurrence.put(symbol, 0);
-		}
-
-		for (Cell cell:cells.values()) {
-			if(cell.isSolved()){
-				incrementSymbolOccurrence(cell.getCurrentValue());
 			}
 		}
 	}
@@ -445,36 +414,6 @@ public class Sudoku extends ObservableModelImpl<Cell> implements Iterable<Cell>,
 		}
 		return false;
 		//return this.fields.values().stream().anyMatch(f -> !f.isNotWrong()); //looks weird but be very careful with simplifications!
-	}
-
-	/**
-	 * Increments the occurrence counter for the given symbol by one
-	 *
-	 * @param symbol The symbol for which the counter should be incremented
-	 */
-	public void incrementSymbolOccurrence(int symbol){
-		if(symbolOccurrence.containsKey(symbol)){
-			int count = symbolOccurrence.get(symbol);
-			count = count < type.getNumberOfSymbols() ? count + 1 : type.getNumberOfSymbols();
-			symbolOccurrence.put(symbol, count);
-		}
-	}
-
-	/**
-	 * Decrements the occurrence counter for the given symbol by one
-	 *
-	 * @param symbol The symbol for which the counter should be decremented
-	 */
-	public void decrementSymbolOccurrence(int symbol){
-		if(symbolOccurrence.containsKey(symbol)){
-			int count = symbolOccurrence.get(symbol);
-			count = count > 0 ? count - 1 : 0;
-			symbolOccurrence.put(symbol, count);
-		}
-	}
-
-	public Map<Integer,Integer> getSymbolOccurrence(){
-		return new HashMap<>(symbolOccurrence);
 	}
 	
 	//debug
