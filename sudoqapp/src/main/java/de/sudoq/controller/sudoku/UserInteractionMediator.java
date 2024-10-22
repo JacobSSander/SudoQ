@@ -504,10 +504,7 @@ public class UserInteractionMediator implements OnGesturePerformedListener, Inpu
 			Set<Integer> allSolved = getSolvedSymbolSet(this.game);
 			for(int i : type.getSymbolIterator())
 			{
-				if(allSolved.contains(i))
-				{
-					this.virtualKeyboard.markButton(i);
-				}
+				this.virtualKeyboard.markButton(i, allSolved.contains(i));
 			}
 		}
 	}

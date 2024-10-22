@@ -145,11 +145,7 @@ public class VirtualKeyboardButtonView extends View implements ObservableInput
 		}
 	}
 
-	public void mark(){
-		isMarked = true;
-	}
-
-	public void unMark(){
-		isMarked = false;
+	public void mark(boolean mark){
+		isMarked = mark;
 	}
 }
