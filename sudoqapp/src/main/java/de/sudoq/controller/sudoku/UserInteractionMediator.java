@@ -506,7 +506,7 @@ public class UserInteractionMediator implements OnGesturePerformedListener, Inpu
 			{
 				if(allSolved.contains(i))
 				{
-					this.virtualKeyboard.disableButton(i);
+					this.virtualKeyboard.markButton(i);
 				}
 			}
 		}

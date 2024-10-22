@@ -46,6 +46,11 @@ public class VirtualKeyboardButtonView extends View implements ObservableInput
 	 * VirtualKeyboardButtonView interagiert, bspw. durch Anlicken.
 	 */
 	private ArrayList<InputListener> inputListener;
+
+	/**
+	 * A flag for marking, but not disabling the button
+	 */
+	private boolean isMarked;
 	
 	/* Constructors */
 	
@@ -63,6 +68,7 @@ public class VirtualKeyboardButtonView extends View implements ObservableInput
 		this.symbol = symbol;
 		this.drawnSymbol = Symbol.getInstance().getMapping(symbol);
 		this.inputListener = new ArrayList<InputListener>();
+		this.isMarked = false;
 		
 		CellViewPainter.getInstance().setMarking(this, CellViewStates.DEFAULT_BORDER);
 	}
@@ -103,6 +109,9 @@ public class VirtualKeyboardButtonView extends View implements ObservableInput
 		{
 			canvas.drawARGB(100, 10, 10, 10);
 		}
+		if(isMarked){
+			canvas.drawARGB(80, 100, 255, 100);
+		}
 	}
 	
 	/**
@@ -134,5 +143,13 @@ public class VirtualKeyboardButtonView extends View implements ObservableInput
 		{
 			listener.onInput(this.symbol);
 		}
+	}
+
+	public void mark(){
+		isMarked = true;
+	}
+
+	public void unMark(){
+		isMarked = false;
 	}
 }

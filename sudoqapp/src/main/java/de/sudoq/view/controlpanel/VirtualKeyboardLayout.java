@@ -214,6 +214,12 @@ public class VirtualKeyboardLayout extends LinearLayout implements ObservableInp
 		int buttonsPerRow = this.buttons.length;
 		this.buttons[symbol % buttonsPerRow][symbol / buttonsPerRow].setEnabled(false);
 	}
+
+	public void markButton(int symbol)
+	{
+		int buttonsPerRow = this.buttons.length;
+		this.buttons[symbol % buttonsPerRow][symbol / buttonsPerRow].mark();
+	}
 	
 	@Override
 	public void invalidate()
