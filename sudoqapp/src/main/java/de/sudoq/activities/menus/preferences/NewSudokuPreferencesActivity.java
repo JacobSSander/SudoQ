@@ -54,6 +54,7 @@ public class NewSudokuPreferencesActivity extends PreferencesActivity
 		markRowColumn = (CheckBox) findViewById(R.id.checkbox_markRowColumn);
 		markWrongSymbol = (CheckBox) findViewById(R.id.checkbox_markWrongSymbol);
 		restrictCandidates = (CheckBox) findViewById(R.id.checkbox_restrictCandidates);
+		markSolvedSymbols = (CheckBox) findViewById(R.id.checkbox_markSolvedSymbols);
 		Log.i("gameSettings", "NewSudokuPreferencesActivity onCreate end is gameSettings null?" + (NewSudokuActivity.gameSettings == null));
 		Log.d("gameSettings", "NewSudokuPreferencesActivity onCreate end is gameSettings null?" + (NewSudokuActivity.gameSettings == null));
 		
@@ -63,7 +64,8 @@ public class NewSudokuPreferencesActivity extends PreferencesActivity
 		markRowColumn.setChecked(confSettings.getAssistance(Assistances.markRowColumn));
 		markWrongSymbol.setChecked(confSettings.getAssistance(Assistances.markWrongSymbol));
 		restrictCandidates.setChecked(confSettings.getAssistance(Assistances.restrictCandidates));
-		
+		markSolvedSymbols.setChecked(confSettings.getAssistance(Assistances.markSolvedSymbols));
+
 		Profile.getInstance().registerListener(this);
 	}
 	
@@ -91,6 +93,7 @@ public class NewSudokuPreferencesActivity extends PreferencesActivity
 		saveCheckbox(markRowColumn, Assistances.markRowColumn, confSettings);
 		saveCheckbox(markWrongSymbol, Assistances.markWrongSymbol, confSettings);
 		saveCheckbox(restrictCandidates, Assistances.restrictCandidates, confSettings);
+		saveCheckbox(markSolvedSymbols, Assistances.markSolvedSymbols, confSettings);
 		//confSettings.setHelper();
 		//confSettings.setCrash();
 		Profile.getInstance().saveChanges();
@@ -115,6 +118,7 @@ public class NewSudokuPreferencesActivity extends PreferencesActivity
 		saveAssistance(Assistances.markRowColumn, markRowColumn);
 		saveAssistance(Assistances.markWrongSymbol, markWrongSymbol);
 		saveAssistance(Assistances.restrictCandidates, restrictCandidates);
+		saveAssistance(Assistances.markSolvedSymbols, markSolvedSymbols);
 		
 		p.setHelperActive(confSettings.isHelperSet());
 		p.setLefthandActive(confSettings.isLefthandModeSet());

@@ -37,5 +37,10 @@ public enum Assistances
 	 * Die Notizen werden bei Änderungen am Sudokus automatisch geändert, sodass nur Symbole als Notizen eingetragen
 	 * sind, die bei ihrer Eingabe in das Feld die Constraints des Sudokus nicht verletzen würden.
 	 */
-	autoAdjustNotes
+	autoAdjustNotes,
+
+	/**
+	 * Marking symbols on the numpad that are appearing in the sudoku the needed number of times.
+	 */
+	markSolvedSymbols
 }

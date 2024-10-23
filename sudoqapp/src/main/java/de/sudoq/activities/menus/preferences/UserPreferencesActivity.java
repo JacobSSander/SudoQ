@@ -80,6 +80,7 @@ public class UserPreferencesActivity extends PreferencesActivity
 		markRowColumn = (CheckBox) findViewById(R.id.checkbox_markRowColumn);
 		markWrongSymbol = (CheckBox) findViewById(R.id.checkbox_markWrongSymbol);
 		restrictCandidates = (CheckBox) findViewById(R.id.checkbox_restrictCandidates);
+		markSolvedSymbols = (CheckBox) findViewById(R.id.checkbox_markSolvedSymbols);
 		
 		name = (EditText) findViewById(R.id.edittext_profilename);
 		name.clearFocus();
@@ -103,6 +104,7 @@ public class UserPreferencesActivity extends PreferencesActivity
 		markRowColumn.setChecked(Profile.getInstance().getAssistance(Assistances.markRowColumn));
 		markWrongSymbol.setChecked(Profile.getInstance().getAssistance(Assistances.markWrongSymbol));
 		restrictCandidates.setChecked(Profile.getInstance().getAssistance(Assistances.restrictCandidates));
+		markSolvedSymbols.setChecked(Profile.getInstance().getAssistance(Assistances.markSolvedSymbols));
 	}
 	
 	/**
@@ -181,6 +183,7 @@ public class UserPreferencesActivity extends PreferencesActivity
 		saveAssistance(Assistances.markRowColumn, markRowColumn);
 		saveAssistance(Assistances.markWrongSymbol, markWrongSymbol);
 		saveAssistance(Assistances.restrictCandidates, restrictCandidates);
+		saveAssistance(Assistances.markSolvedSymbols, markSolvedSymbols);
 		Profile.getInstance().saveChanges();
 	}
 	

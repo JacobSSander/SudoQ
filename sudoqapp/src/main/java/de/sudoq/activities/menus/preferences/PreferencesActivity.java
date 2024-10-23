@@ -19,6 +19,7 @@ public abstract class PreferencesActivity extends SudoQCompatActivity implements
 	CheckBox markRowColumn;
 	CheckBox markWrongSymbol;
 	CheckBox restrictCandidates;
+	CheckBox markSolvedSymbols;
 	
 	//CheckBox helper;
 	//CheckBox lefthand;
